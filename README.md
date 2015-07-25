@@ -429,244 +429,247 @@ bundle exec thor datashift:generate:excel -m Spree::Product -r spree_product_tem
 
 > NOTE: bundler install didn't get the latest version from git. Brought down 0.5.0 rather than 0.6.0. Dependency mismatched. Breaking change. [See git issue](https://github.com/bundler/bundler/issues/2204) 6/7/15 3AM Successful migration
 
-CODE
-LONG DESCRIPTION
-Product Tags
-BRAND
-GROUP NAME
-PRODUCT CATEGORY
-PRODUCT TITLE
-DETAILS
-DELETED ITEM ICON
-AUTHOR
-N
-TYPE
-COLOUR
-SERIES
-TEXTURE
-VOLUME
-VOLUME 1
-WEIGHT
-WEIGHT 1
-SIZE
-DIMENSION
-THICKNESS
-DIMENSION 1
-THICKNESS 1
-MAIN IMAGE
-ADDITIONAL IMAGES
-COLOUR CHART
-CMYK COLOUR
-INDIVIDUAL COLOUR RGB
-LOGO
-MERGED DESCRIPTION
-SLIDE DESCRIPTION
-ISBN
-UNIT
-SINGLE WSALE
-PACK WSALE
-SINGLE WS$
-UNIT PRICE
-IN A PACK W$
-DISCOUNT CODE
-WSALE
-SINGLE SCHOOL
-PACK SCHOOL
-SINGLE S$
-UNIT PRICE IN A PACK S$
-DISCOUNT CODE SCH
-SINGLE RETAIL 
-PACK RETAIL
-SINGLE AS $
-UNIT PRICE IN A PACK AS$
-DISCOUNT CODE AS
-RRP$
-SAVE % OFF RECOMMENDED RETAIL
-MSDS ICON
-PRODUCT INFORMATION/FLYERS ICON
-SHIPPING INFORMATION ICON
-ACID FREE
-AUSTRALIAN MADE ICON
-"Catalogue Page Number"
-Group Code
-Swatch font colour
-ENABLED
-bulky freight
-COLOURCHART NAME FOR SWATCHES
-ENABLED FOR WHICH SITE
-Prices are for a single item but must buy in packs
+```
 
-
-Unique properties per product type
-Adjustments per store
-
-Store Codes
-Australian Art Supplies = AAS = Spree::Store[:id]
-Art Scene               = AS  = Spree::Store[:id] 
-Art Basics Wholesale    = WS  = Spree::Store[:id]
-Art Basics School       = SC  = Spree::Store[:id]
-
-Normalised **Product Properties** 
-
-    t.string    "manufacturer"
-    t.string    "brand"
+    CODE
+    LONG DESCRIPTION
+    Product Tags
+    BRAND
+    GROUP NAME
+    PRODUCT CATEGORY
+    PRODUCT TITLE
+    DETAILS
+    DELETED ITEM ICON
+    AUTHOR
+    N
+    TYPE
+    COLOUR
+    SERIES
+    TEXTURE
+    VOLUME
+    VOLUME 1
+    WEIGHT
+    WEIGHT 1
+    SIZE
+    DIMENSION
+    THICKNESS
+    DIMENSION 1
+    THICKNESS 1
+    MAIN IMAGE
+    ADDITIONAL IMAGES
+    COLOUR CHART
+    CMYK COLOUR
+    INDIVIDUAL COLOUR RGB
+    LOGO
+    MERGED DESCRIPTION
+    SLIDE DESCRIPTION
+    ISBN
+    UNIT
+    SINGLE WSALE
+    PACK WSALE
+    SINGLE WS$
+    UNIT PRICE
+    IN A PACK W$
+    DISCOUNT CODE
+    WSALE
+    SINGLE SCHOOL
+    PACK SCHOOL
+    SINGLE S$
+    UNIT PRICE IN A PACK S$
+    DISCOUNT CODE SCH
+    SINGLE RETAIL 
+    PACK RETAIL
+    SINGLE AS $
+    UNIT PRICE IN A PACK AS$
+    DISCOUNT CODE AS
+    RRP$
+    SAVE % OFF RECOMMENDED RETAIL
+    MSDS ICON
+    PRODUCT INFORMATION/FLYERS ICON
+    SHIPPING INFORMATION ICON
+    ACID FREE
+    AUSTRALIAN MADE ICON
+    "Catalogue Page Number"
+    Group Code
+    Swatch font colour
+    ENABLED
+    bulky freight
+    COLOURCHART NAME FOR SWATCHES
+    ENABLED FOR WHICH SITE
+    Prices are for a single item but must buy in packs
     
-    # Replaces 
-    # BD AUSTRALIAN MADE ICON
-    # :country_of_origin == AU ? span.icon.icon-country-au : nil
-    # Display flag for each country of origin
-    t.string    "country_of_origin"
-    # Replaces
-    # BK ENABLED FOR WHICH SITE
-    # configure belongs_to relationship
-    t.integer   "store"             default: "AS"
-    t.integer   "rrp"
-    t.integer   "cost_price"
-    r.integer   "pack_qty"          
-    r.integer   "pack_discount"     default: 0.1
-    # Replaces
-    # E GROUP NAME
-    r.string    "group_code"
-
-
-acrylic_ink
-
-# Acrylic Mediums
-acrlic_medium
-
-# Acrylic Paint Sets
-
-# Acrylic Painting
-
-# Acrylic Paints
-acrylic_paint
-
-
-# Archival And Conservation Tapes
-
-# Block Printing
     
-book
-    - title
-    - isbn
-    - author
-    - publisher
-    - editor
-    - pages
-    - edition
-    - in_print
+    Unique properties per product type
+    Adjustments per store
     
-# Carry Cases And Accessories
-
-container
-
-# Charcoal Pencils
-
-# Coloured Pencils
-
-# Compressors
-
-# Design And Illustration Markers
-
-# Drawing And Pastel Paper
-
-# Fabric Markers
-
-# Face & Body Paints
-
-# Fixative Sprays
-
-# General Purpose Scissors
-
-# Gouache Paints
-
-# Hog Bristle Brushes
-
-# Inks
-
-# Masking Film
-
-# Matboards
-
-# Modelling Clay
-
-# Multi Purpose
-
-paint
-    - colour
-    - binder
-    - volume
-    - series
-    - pigments
-
-# Oil Paints
-
-# Palette Knives
-palette_knife
-
-paper
-    - width
-    - height
-    - weight
-    - texture
-    - acid_free
-    - fibre
+    Store Codes
+    Australian Art Supplies = AAS = Spree::Store[:id]
+    Art Scene               = AS  = Spree::Store[:id] 
+    Art Basics Wholesale    = WS  = Spree::Store[:id]
+    Art Basics School       = SC  = Spree::Store[:id]
     
-# Pigments
-pigment
-
-# Presentation Portfolios And Display Folders
-folder
-
-container
-
-# Soft Pastels
-
-soft_pastel
-
-oil_pastel
-    - shade
-    - colour
-
-# Spray Adhesives
-
-spray_adhesive
-
-# Stretched Canvas
-
-stretched_canvas
-    t.string     "fabric"    
-    t.integer    "width"     scale: 2, default: 0.0
-    t.integer    "height"    scale: 2, default: 0.0
-    t.integer    "depth"     scale: 2, default: 0.0
-    t.integer    "weight"    scale: 2, default: 0.0
-    t.boolean    "primed"      
-
-# Tape Dispensers
-
-# Tracing And Detail Paper
-
-video
-    - discs
-    - duration
-    - format
-    - region
+    Normalised **Product Properties** 
     
-# Watercolour Mediums
-
-# Watercolour Mediums - Schmincke
-# WTF
-
-# Watercolour Pads
-watercolour_pad
-
-# Watercolour Paint Sets
-
-
-# Watercolour Paints
-
-sets
-    - includes
+        t.string    "manufacturer"
+        t.string    "brand"
+        
+        # Replaces 
+        # BD AUSTRALIAN MADE ICON
+        # :country_of_origin == AU ? span.icon.icon-country-au : nil
+        # Display flag for each country of origin
+        t.string    "country_of_origin"
+        # Replaces
+        # BK ENABLED FOR WHICH SITE
+        # configure belongs_to relationship
+        t.integer   "store"             default: "AS"
+        t.integer   "rrp"
+        t.integer   "cost_price"
+        r.integer   "pack_qty"          
+        r.integer   "pack_discount"     default: 0.1
+        # Replaces
+        # E GROUP NAME
+        r.string    "group_code"
+    
+    
+    acrylic_ink
+    
+    # Acrylic Mediums
+    acrlic_medium
+    
+    # Acrylic Paint Sets
+    
+    # Acrylic Painting
+    
+    # Acrylic Paints
+    acrylic_paint
+    
+    
+    # Archival And Conservation Tapes
+    
+    # Block Printing
+        
+    book
+        - title
+        - isbn
+        - author
+        - publisher
+        - editor
+        - pages
+        - edition
+        - in_print
+        
+    # Carry Cases And Accessories
+    
+    container
+    
+    # Charcoal Pencils
+    
+    # Coloured Pencils
+    
+    # Compressors
+    
+    # Design And Illustration Markers
+    
+    # Drawing And Pastel Paper
+    
+    # Fabric Markers
+    
+    # Face & Body Paints
+    
+    # Fixative Sprays
+    
+    # General Purpose Scissors
+    
+    # Gouache Paints
+    
+    # Hog Bristle Brushes
+    
+    # Inks
+    
+    # Masking Film
+    
+    # Matboards
+    
+    # Modelling Clay
+    
+    # Multi Purpose
+    
+    paint
+        - colour
+        - binder
+        - volume
+        - series
+        - pigments
+    
+    # Oil Paints
+    
+    # Palette Knives
+    palette_knife
+    
+    paper
+        - width
+        - height
+        - weight
+        - texture
+        - acid_free
+        - fibre
+        
+    # Pigments
+    pigment
+    
+    # Presentation Portfolios And Display Folders
+    folder
+    
+    container
+    
+    # Soft Pastels
+    
+    soft_pastel
+    
+    oil_pastel
+        - shade
+        - colour
+    
+    # Spray Adhesives
+    
+    spray_adhesive
+    
+    # Stretched Canvas
+    
+    stretched_canvas
+        t.string     "fabric"    
+        t.integer    "width"     scale: 2, default: 0.0
+        t.integer    "height"    scale: 2, default: 0.0
+        t.integer    "depth"     scale: 2, default: 0.0
+        t.integer    "weight"    scale: 2, default: 0.0
+        t.boolean    "primed"      
+    
+    # Tape Dispensers
+    
+    # Tracing And Detail Paper
+    
+    video
+        - discs
+        - duration
+        - format
+        - region
+        
+    # Watercolour Mediums
+    
+    # Watercolour Mediums - Schmincke
+    # WTF
+    
+    # Watercolour Pads
+    watercolour_pad
+    
+    # Watercolour Paint Sets
+    
+    
+    # Watercolour Paints
+    
+    sets
+        - includes
+```
 
 ##### Using Spree's REST API
 
