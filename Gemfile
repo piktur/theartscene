@@ -42,6 +42,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 gem 'unicorn'
 
+# gem 'actionpack-page_caching'
+# gem 'actionpack-action_caching'
+
 group :development do
   # Model schema visualisation
   gem 'rails-erd'

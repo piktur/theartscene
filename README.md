@@ -152,92 +152,92 @@ Note: documentation has not been updated to match new user interface
 - [Paid Support](https://spreecommerce.com/training_and_support)
 - [Affiliates](https://spreecommerce.com/solution_partners)
 
-_# Roadmap
- ## Stages
- ### Now
- 1. Prepare basic store for internal testing ~ **six to eight weeks**
-     - Required Spree Configuration
-         - Store separation 
-             - Zones
-             - Price Adjustments
-                 - WSale, School and Retail
-                 - Taxation
-                 - Promos
-         - Product Properties
-         - Product Option Types
-     - Prepare majority of current **data** for Spree ingest
-     - **Restyle** front and backend views
-     - Configure **customer registration**
-         - Registration Form
-         - ~~Login via social network~~
-     - Implement **Payment Gateway** and **Single Page Checkout**
-     - Configure **flat Shipping Rates**, **Carriers** and **Options**
-     - Configure **User Roles**, priveleges and authorisation etc.
-     - Format **order documents**
-         - invoices
-         - pick slips
-         - ~~shipping labels~~
-         - ~~shipping manifest~~
-     - Format **transactional emails**
- 2. Revisions and further testing ~ **two weeks**
- 3. Training ~ **one to two weeks**
-     - Write documentation 
-         - Procedural
-             - Admin
-             - Clerical
-     - Instruct users
- 3. Prepare for launch ~ **one to two weeks**
-     - Prepare hosting and staging server
-     - Prepare static assets, images
-     - Prime CDN with prepared static assets
-     - Basic Google Analytics configuration
-     - Configure transactional email service
- 4. Launch
+# Roadmap
+## Stages
+### Now
+1. Prepare basic store for internal testing ~ **six to eight weeks**
+- Required Spree Configuration
+  - Store separation 
+    - Zones
+    - Price Adjustments
+      - WSale, School and Retail
+      - Taxation
+      - Promos
+  - Product Properties
+  - Product Option Types
+- Prepare majority of current **data** for Spree ingest
+- **Restyle** front and backend views
+- Configure **customer registration**
+   - Registration Form
+   - ~~Login via social network~~
+- Implement **Payment Gateway** and **Single Page Checkout**
+- Configure **flat Shipping Rates**, **Carriers** and **Options**
+- Configure **User Roles**, priveleges and authorisation etc.
+- Format **order documents**
+  - invoices
+  - pick slips
+  - ~~shipping labels~~
+  - ~~shipping manifest~~
+- Format **transactional emails**
+2. Revisions and further testing ~ **two weeks**
+3. Training ~ **one to two weeks**
+  - Write documentation 
+    - Procedural
+      - Admin
+      - Clerical
+  - Instruct users
+4. Prepare for launch ~ **one to two weeks**
+  - Prepare hosting and staging server
+  - Prepare static assets, images
+  - Prime CDN with prepared static assets
+  - Basic Google Analytics configuration
+  - Configure transactional email service
+5. Launch
  
- ** Max time to launch: 3.5 months **
- Launch leading into Annual Sale
- Allow adequate time for;
- - real world testing and debugging, 
- - staff development 
- - development of curated marketing material/campaign
+> 
+  ** Max time to launch: 3.5 months **
+  Launch leading into Annual Sale
+  Allow adequate time for;
+  - real world testing and debugging, 
+  - staff development 
+  - development of curated marketing material/campaign
  
- ### Post Launch - priority to be determined
- - Write Development Docs
- - Refinement and additional functionality
-    - Server and Performance Optimisation
- - Per order **Freight Calculation** and per zone **Carriers**
- - **Marketing**
-     - Sponsorship Advertising
-     - Social Media
-     - Blogging
-         - Staff Reccomendations
-         - Guest posts
-     - User 
-         - Comments/Feedback
-         - Reviews 
-     - **Targeted Email Campaigns**
- - Abandoned Cart followup 
-     - Promo code offer
- - Rewrite copy
- - Assess staff and customer feedback
- - Write cutom reports
-     ### Report Focus
-     - Analytics
-     - Sales by time period
-     - Profit/Loss: Profit/Loss report ie. = gross - (cost_price + postage + promotions)
-         - revenue last n days
-         - % change revenue since n days
-     - GST
-     - Abandoned shopping carts
-     - Stock
-         - Inventory Levels
-         - Popular products
-     - User Activity: Identify frequent buyers and visitors. To assist targeted email campaigns
-         - visitors last n days
-         - % change visitors last n days
- - Data export and schema linkup for accounting
+### Post Launch - priority to be determined
+- Write Development Docs
+- Refinement and additional functionality
+- Server and Performance Optimisation
+- Per order **Freight Calculation** and per zone **Carriers**
+- **Marketing**
+- Sponsorship Advertising
+- Social Media
+- Blogging
+  - Staff Reccomendations
+  - Guest posts
+- User 
+  - Comments/Feedback
+  - Reviews 
+- **Targeted Email Campaigns**
+- Abandoned Cart followup 
+  - Promo code offer
+- Rewrite copy
+- Assess staff and customer feedback
+- Write cutom reports
 
----
+### Report Focus
+- Analytics
+- Sales by time period
+- Profit/Loss: Profit/Loss report ie. = gross - (cost_price + postage + promotions)
+  - revenue last n days
+  - % change revenue since n days
+- GST
+- Abandoned shopping carts
+- Stock
+  - Inventory Levels
+  - Popular products
+- User Activity: Identify frequent buyers and visitors. To assist targeted email campaigns
+  - visitors last n days
+  - % change visitors last n days
+- Data export and schema linkup for accounting
 
 ## Running Costs
 
@@ -267,7 +267,7 @@ _# Roadmap
 
 ### Transactional and Marketing Messsaging Service
 - [**MailChimp**](http://mailchimp.com/) & [**Mandrill**](https://www.mandrill.com/)
-- Integration with [Spree Chimpy - Extension](https://github.com/DynamoMTL/spree_chimpy)
+- Integration via extension [Spree Chimpy](https://github.com/DynamoMTL/spree_chimpy)
 
 #### Campaign Tracking
 Track campaign success with [MailChimp eCommerce360](http://kb.mailchimp.com/integrations/other-integrations/about-ecommerce360)
@@ -288,17 +288,15 @@ Commentary and Dev resources.
 - [7](https://ninefold.com/blog/2014/05/15/spree-commerce-and-ninefold-meetup-recap/)
 - [8](http://blog.benmorgan.io/post/95144946546/getting-started-with-spree-wombat-and-ninefold)
 
-Alternatives?
+> Alternatives?
 
 ### Content Delivery Network(CDN)
 - [**Amazon S3**](http://aws.amazon.com/s3/)
 
-Alternatives?
+> Alternatives?
 
 ## Development Costs
 TODO
-
----
 
 # Development Goals
 
@@ -402,6 +400,8 @@ At present, the dataset is maintained and stored in a Spreadsheet and made porta
     - transform column headers on import
     
 > Queue [**Datashift**](https://github.com/autotelik/datashift). Datashift provides **import/export** facilities to shift data between [ActiveRecord](http://guides.rubyonrails.org/active_record_querying.html) databases/applications and Spreadsheets/CSV
+  OR https://github.com/mespina/spree_importer
+  OR https://github.com/jumph4x/spree-batch-products/tree/3-0-stable
 
 ##### Using Datashift
 Ensure *.thor file exists in root directory.
@@ -716,6 +716,7 @@ ____
 
 ### Transaction Messaging and Marketing
 [Communicate with MailChimp](https://github.com/DynamoMTL/spree_chimpy)
+[Integrate Devise Invitable Tutorial](http://nebulab.it/blog/installing-devise-invitable-on-spree)
 
 ### Exporting the Customer database
 TODO: Write **export as CSV** task. For transport to Retail POS, Attache etc
@@ -819,6 +820,12 @@ ______
 ## Performance
 Basecamp as a benchmark for speed in the Rails world, see [How Basecamp got to be so damn fast...](https://signalvnoise.com/posts/3112-how-basecamp-next-got-to-be-so-damn-fast-without-using-much-client-side-ui)
 
+Unfortunately, this incredible speed-up is only available to stateless pages where all visitors are treated the same. Content management systems -- including weblogs and wikis -- have many pages that are a great fit for this approach, but account-based systems where people log in and manipulate their own data are often less likely candidates.
+
+Russian Doll Caching? 
+
+[Rails Caching Guide](http://guides.rubyonrails.org/caching_with_rails.html)
+
 ### Query Caching
 
 ### Page Caching
@@ -869,19 +876,16 @@ NewRelic
     text * count
   end
   ~~~
-
-### Configuration
+  
+### Version Control
+Github
 
 ### Database creation
 
 ### Database initialization
 
+
 ### How to run the test suite
-
-### Services (job queues, cache servers, search engines, etc.)
-
-### Deployment instructions
-
 #### Seed Demo Data
 https://guides.spreecommerce.com/developer/navigating.html#layout-and-structure
 ```
@@ -892,14 +896,9 @@ https://guides.spreecommerce.com/developer/navigating.html#layout-and-structure
     # Load sample data
     bundle exec rake spree_sample:load
 ```
-#### Integrating Extensions
-1. Fork the required repo
-2. Clone to your dev computer ```git clone -b 3-0-stable https://github.com/noname00000123/spree-extension.git```
-3. ```cd``` into clone root
-3. Add upstream remote ```git remote upstream https://github.com/source/spree-extension-source.git```
-4. https://help.github.com/articles/syncing-a-fork/
-#### Setup a testing environment
 
+
+#### Setup a testing environment
 ##### Integration and Unit testing project
 
 ```rspec --init``` to set up RSpec
@@ -973,23 +972,38 @@ require 'spree_price_books/factories'
     
     # To add to existing rails application
     bundle install
+    
+    respec --init
+    
     rails g spree:install --migrate=false --sample=false --seed=false
     # bundle exec rake railties:install:migrations
     # bundle exec rake db:migrate
     # bundle exec rake db:seed
+    
     # Load sample data 
     # bundle exec rake spree_sample:load
     
     # Run dependency tasks
+    
     bundle exec rake spree_auth:install:migrations
     bundle exec rake db:migrate
     bundle exec rails g spree:auth:install
-    bundle exec rake spree_auth:admin:create
+    
+    # Create admin if none already
+    # bundle exec rake spree_auth:admin:create
+    
     bundle exec rails g spree_i18n:install
+    
+    bundle exec rails g spree_gateway:install
+    
     bundle exec rails g spree_multi_domain:install
+    
     bundle exec rails g spree_multi_currency:install
+    
     bundle exec rails g spree_price_books:install
     bundle exec rake price_books:currency_rates
+    
+    bundle exec rails g spree_chimpy:install
     
     # Generate a test app
     DB=theartscene_development bundle exec rake test_app
@@ -1038,8 +1052,530 @@ require 'spree_price_books/factories'
     ENTRYPOINT /usr/bin/start-server
 
 ```
+### Services (job queues, cache servers, search engines, etc.)
+
+### Deployment instructions
+See the official Ubuntu deployment guide [here](https://guides.spreecommerce.com/developer/manual-ubuntu.html)
+
+#### Installing and Configuring Extensions
+
+##### Integrating Extensions
+1. Fork the required repo
+2. Clone to your dev computer ```git clone -b 3-0-stable https://github.com/noname00000123/[spree-extension].git```
+3. ```cd``` into clone root
+3. Add upstream remote ```git remote upstream https://github.com/[source]/[spree-extension-source].git```
+4. [Sync](https://help.github.com/articles/syncing-a-fork/) 
+    1. ```git fetch upstream```
+    2. ```git checkout master```
+    3. ```git merge upstream/master```
+
+Add forked repo to Gemfile 
+
+```
+gem 'spree-extension',
+    github: 'owner/repo',
+    branch: '3-0-stable'
+```
+
+Then ```bundle install```
+
+And generate necessary files and migrations 
+```bundle exec rails g [spree-extension]:[task]```
+
+And migrate if necessary
+```rake db:migrate```
+
+##### Configuration
+Environment configuration
+config/environments/[environment].rb
+
+Default configuration set here core/app/models/spree/app_configuration.rb 
+Default configuration can be overriden here config/initializers/spree.rb
+
+**Hard-code** application specific defaults -- settings defined cannot be overridden via user interface. Some options would only ever need to be set once ie. the *default currency*. By hard-coding we limit enduser access to options that shouldn't be touched.
+
+- Configure extensions
+Application specific preferences can be defined as per guide here http://blog.crowdint.com/2015/04/16/get-rid-of-your-spree-preferences-headaches-once-and-for-all.html
 
 
+
+@docs https://guides.spreecommerce.com/developer/preferences.html
+
+```
+
+  # Will determine if the state field should appear/required on the checkout page
+  # @default true.
+  # config.address_requires_state
+
+  # The path to the logo to display on the admin interface. Can be different
+  # from Spree::Config[:logo].
+  # @default logo/spree_50.png
+  # config.admin_interface_logo
+
+  # How many products to display on the products listing in the admin
+  # interface.
+  # @default 10
+  # config.admin_products_per_page
+
+  # Continues the checkout process even if the payment gateway error failed.
+  # @default false
+  # config.allow_checkout_on_gateway_error
+
+  # @default false
+  # config.allow_guest_checkout
+
+  # Determines if an alternative phone number field should be present for the
+  # shipping address on the checkout page.
+  # @default false
+  # config.alternative_shipping_phone
+  
+  # Ensures confirmation step is always in checkout_progress bar, but does 
+  # not force a confirm step if your payment methods do not support it.
+  # config.always_include_confirm_step
+  
+  # Determines if the site name (current_store.site_name) should be placed into
+  # the title.
+  # @default true
+  # config.always_put_site_name_in_title
+
+  # Action to take on capture credit card capture, if false just authorize for 
+  # payment later or, if true, purchase via the current credit card gateway.
+  # @default false
+  # config.auto_capture
+  
+  # Captures payment for each shipment in Shipment#after_ship callback, and 
+  # makes Shipment.ready when payment authorized.
+  # config.auto_capture_on_dispatch
+  
+  # Only invalidate product cache when a stock item changes whether it is 
+  # in_stock
+  # config.binary_inventory_cache
+  
+  # Limits the checkout to countries from a specific zone, by name.
+  # @default nil.
+  # config.checkout_zone
+
+  # Determines whether or not a field for “Company” displays on the checkout
+  # pages for shipping and billing addresses.
+  # @default  false.
+  # config.company
+
+  # The three-letter currency code for the currency that prices will be
+  # displayed in.
+  # @default  “USD”.
+  # config.currency
+
+  # The default country’s id.
+  # config.default_country_id
+
+  # The list of alert IDs that you have dismissed.
+  # config.dismissed_spree_alerts
+
+  # This requires payment profiles to be supported on your gateway of choice as
+  # well as a delayed job handler to be configured with activejob. kicks off an
+  # exchange shipment upon return authorization save. charge customer if they
+  # do not return items within timely manner.
+  # @default true
+  # config.expedited_exchanges          = false
+
+  # The amount of days the customer has to return their item after the
+  # expedited exchange is shipped in order to avoid being charged
+  # @default 14
+  # config.expedited_exchanges_days_window = 7
+
+  # Stores the last time that alerts were checked for. Alerts are checked
+  # for every 12 hours.
+  # config.last_check_for_spree_alerts
+
+  # The path to the layout of your application, relative to the app/views
+  # directory.
+  # @default  spree/layouts/spree_application.
+  # config.layout = "application"
+
+  # The logo to display on your frontend.
+  # @default  logo/spree_50.png.
+  # config.logo
+
+  # The number of levels to descend when viewing a taxon menu.
+  # @default 1.
+  # config.max_level_in_taxons_menu
+
+  # The number of orders to display on the orders listing in the admin backend.
+  # @default 15.
+  # config.orders_per_page
+  
+  # Determines if a return item is restocked automatically once it has been received
+  # @default true
+  # config.restock_inventory
+  
+  # Return eligibility period
+  # @default 365
+  # config.return_eligibility_number_of_days
+
+  # Default mail headers settings
+  # @default true
+  # config.send_core_emails
+  
+  # Determines if shipping instructions are requested during checkout.
+  # @default false.
+  # config.shipping_instructions
+
+  # Determines if, on the admin listing screen, only completed orders should be
+  # shown.
+  # @default true.
+  # config.show_only_complete_orders_by_default
+
+  # Determines if the variant’s full price or price difference from a product
+  # should be displayed on the product’s show page.
+  # @default false.
+  # config.show_variant_full_price
+
+  # Determines if tax information should be based on shipping address, rather
+  # than the billing address.
+  # @default  true.
+  # config.tax_using_ship_address
+
+  # Determines if inventory levels should be tracked when products are
+  # purchased at checkout. This option causes new InventoryUnit objects to be
+  # created when a product is bought. @default  true.
+  # config.track_inventory_levels
+
+```
+
+```
+config/initializers/spree.rb
+# Readme outdated, proper configuration below
+Spree::PrintInvoice::Config.set(
+    page_layout: :portrait,
+    page_size: 'A4',
+)
+Spree::PrintInvoice::Config.set(logo_path: '/path/to/public/images/company-logo.png')
+Spree::PrintInvoice::Config.set(store_pdf: true)
+Spree::PrintInvoice::Config.set(storage_path: 'documents/invoices')
+# Spree::PrintInvoice::Config.set(next_number: [1|'your current next invoice number'])
+```
+
+##### Spree Multi Domain
+Spree is allows multi-store management from a single backend via the [spree-multi-domain](https://github.com/spree-contrib/spree-multi-domain) extension. 
+
+Add gem to Gemfile
+
+```
+gem 'spree_multi_domain',
+    git: 'git://github.com/spree/spree-multi-domain.git'
+```
+
+then
+
+``` $ bundle exec rails g spree_multi_domain:install ```
+
+Each storefront is accessible at its own unique domain.
+
+###### DNS configuration
+[Prax](https://github.com/ysbaddaden/prax) is a pure ruby alternative to Pow!! that runs on GNU/Linux. Rack proxy server for development Local Development.
+
+```
+$ sudo git clone git://github.com/ysbaddaden/prax.git /opt/prax
+$ cd /opt/prax/
+$ ./bin/prax install
+```
+
+```
+$ cd ~/.prax
+$ ln -s ~/Work/myapp .
+$ firefox http://myapp.dev
+```
+
+We're then able to define separate domains per unique storefront. 
+In our case, when we've started the local app server with ```foreman start``` we can visit each of these storefronts with domain names defined in our Spree *Store & Domains* configuration.
+- [The Art Scene: as.dev:3000](as.dev:3000)
+- [Art Basics: ab.dev:3000](ab.dev:3000)
+- [Australian Art Supplies: aas.dev:3000](aas.dev:3000)
+
+Each of the store fronts is namespaced and maintained separately in app/views/spree/[namespace]
+
+Global or shared view files are available at app/views/spree/global
+
+##### Authorisation, Permissions and User Roles with Spree Auth Devise
+[Spree Auth Devise](https://github.com/spree/spree_auth_devise)
+[Devise](https://github.com/plataformatec/devise)
+
+> Devise Configuration
+```
+
+  config.secret_key
+  
+  # Custom domain or key for cookies. Not set by default
+  # @default {}
+  config.rememberable_options
+  
+  # The number of times to encrypt password.
+  # @default 10
+  config.stretches
+  
+  # The default key used when authenticating over http auth.
+  # @default nil
+  config.http_authentication_key
+  
+  # Keys used when authenticating a user.
+  # @default [ :email ]
+  config.authentication_keys
+  
+  # Request keys used when authenticating a user.
+  # @default []
+  config.request_keys
+  
+  # Keys that should be case-insensitive.
+  # @default [ :email ]
+  config.case_insensitive_keys
+  
+  # Keys that should have whitespace stripped.
+  # @default []
+  config.strip_whitespace_keys
+  
+  # If http authentication is enabled by default.
+  # @default false
+  config.http_authenticatable
+  
+  # If http headers should be returned for ajax requests. True by default.
+  # @default true
+  config.http_authenticatable_on_xhr
+  
+  # If params authenticatable is enabled by default.
+  # @default true
+  config.params_authenticatable
+  
+  # The realm used in Http Basic Authentication.
+  # @default "Application"
+  config.http_authentication_realm
+  
+  # Email regex used to validate email formats. It simply asserts that
+  # an one (and only one) @ exists in the given string. This is mainly
+  # to give user feedback and not to assert the e-mail validity.
+  # @default '/\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/'
+  config.email_regexp
+  
+  # Range validation for password length
+  # @default 6..128
+  config.password_length
+  
+  # The time the user will be remembered without asking for credentials again.
+  # @default 2.weeks
+  config.remember_for
+  
+  # If true, extends the user's remember period when remembered via cookie.
+  # @default false
+  config.extend_remember_period
+  
+  # If true, all the remember me tokens are going to be invalidated when the user signs out.
+  # @default true
+  config.expire_all_remember_me_on_sign_out
+  
+  # Time interval you can access your account before confirming your account.
+  # nil - allows unconfirmed access for unlimited time
+  # @default 0.days
+  config.allow_unconfirmed_access_for
+  
+  # Time interval the confirmation token is valid. nil = unlimited
+  # @default nil
+  config.confirm_within
+  
+  # Defines which key will be used when confirming an account.
+  # @default [ :email ]
+  config.confirmation_keys
+  
+  # Defines if email should be reconfirmable.
+  # False by default for backwards compatibility.
+  # @default false
+  config.reconfirmable
+  
+  # Time interval to timeout the user session without activity.
+  # @default 30.minutes
+  config.timeout_in
+  
+  # Authentication token expiration on timeout
+  # @default false
+  config.expire_auth_token_on_timeout
+  
+  # Used to encrypt password. Please generate one with rake secret.
+  # @default nil
+  config.pepper
+  
+  # Scoped views. Since it relies on fallbacks to render default views, it's
+  # turned off by default.
+  # @default false
+  config.scoped_views
+  
+  # Defines which strategy can be used to lock an account.
+  # Values: :failed_attempts, :none
+  # @default :failed_attempts
+  config.lock_strategy
+  
+  # Defines which key will be used when locking and unlocking an account
+  # @default [ :email ]
+  config.unlock_keys
+  
+  # Defines which strategy can be used to unlock an account.
+  # Values: :email, :time, :both
+  # @default :both
+  config.unlock_strategy
+  
+  # Number of authentication tries before locking an account
+  # @default 20
+  config.maximum_attempts
+  
+  # Time interval to unlock the account if :time is defined as unlock_strategy.
+  # @default 1.hour
+  config.unlock_in
+  
+  # Defines which key will be used when recovering the password for an account
+  # @default [ :email ]
+  config.reset_password_keys
+  
+  # Time interval you can reset your password with a reset password key
+  # @default 6.hours
+  config.reset_password_within
+  
+  # The default scope which is used by warden.
+  # @default nil
+  config.default_scope
+  
+  # Address which sends Devise e-mails.
+  # @default nil
+  config.mailer_sender
+  
+  # Skip session storage for the following strategies
+  # @default []
+  config.skip_session_storage
+  
+  # Which formats should be treated as navigational.
+  # @default ["*/*", :html]
+  config.navigational_formats
+  
+  # When set to true, signing out a user signs out all other scopes.
+  # @default true
+  config.sign_out_all_scopes
+  
+  # The default method used while signing out
+  # @default :get
+  config.sign_out_via
+  
+  # The parent controller all Devise controllers inherits from.
+  # Defaults to ApplicationController. This should be set early
+  # in the initialization process and should be set to a string.
+  # @default "ApplicationController"
+  config.parent_controller
+  
+  # The parent mailer all Devise mailers inherit from.
+  # Defaults to ActionMailer::Base. This should be set early
+  # in the initialization process and should be set to a string.
+  # @default "ActionMailer::Base"
+  config.parent_mailer
+  
+  # The router Devise should use to generate routes. Defaults
+  # to :main_app. Should be overridden by engines in order
+  # to provide custom routes.
+  # @default nil
+  config.router_name
+  
+  
+  # Set the omniauth path prefix so it can be overridden when
+  # Devise is used in a mountable engine
+  # @default nil
+  config.omniauth_path_prefix
+  
+  # Set if we should clean up the CSRF Token on authentication
+  # @default true
+  config.clean_up_csrf_token_on_authentication
+  
+  # Private methods to interface with Warden.
+  # @default nil
+  config.warden_config
+  
+  # When true, enter in paranoid mode to avoid user enumeration.
+  # @default false
+  config.paranoid
+  
+  # When true, warn user if they just used next-to-last attempt of authentication
+  # @default true
+  config.last_attempt_warning
+  
+  # Stores the token generator
+  # @default nil
+  config.token_generator
+  
+```
+
+##### Internationalisation 
+
+###### Prices
+google_currency throws NoMethod error ```synchronize``` when version other than 3.2.0. This dependency sets spree_core money dependency back to 6.5.0. But doing so permits database seed
+```
+    # https://github.com/spree-contrib/spree_multi_currency/tree/3-0-stable
+    # bundle && bundle exec rails g spree_multi_currency:install
+    gem 'spree_multi_currency',
+        github: 'spree-contrib/spree_multi_currency',
+        branch: '3-0-stable'
+        
+    gem 'google_currency', '3.2.0'
+    
+    # Requires: spree_multi_currency
+    # Price book functionality for running sales, role based, country based pricing etc...
+    # bundle exec rails g spree_price_books:install
+    gem 'spree_price_books',
+        # github: 'noname00000123/spree_price_books'
+        github: 'dickies-co-uk/spree_price_books',
+        branch: '3-0-stable'
+```
+
+##### Payments
+https://github.com/railsdog/spree_braintree_cse
+```gem 'spree_braintree-cse'```
+https://www.braintreepayments.com/blog/client-side-encryption/
+
+https://github.com/deseretbook/spree_sale_pricing
+
+##### Shipping
+https://github.com/railsdog/spree_shipping_labels
+
+##### Integrating with Mandrill Transactional and MailChimp Campaign Services
+Spree 3 extracted spree_mail_settings in fav our of default Rails ActionMailer.
+TODO confirgure ActionMailer for Devise transactional emails Mandrill SMTP and MailChimp Campaigns. 
+
+- [**MailChimp**](http://mailchimp.com/) & [**Mandrill**](https://www.mandrill.com/)
+- Integration with [Spree Chimpy - Extension](https://github.com/DynamoMTL/spree_chimpy)
+
+Track campaign success with [MailChimp eCommerce360](http://kb.mailchimp.com/integrations/other-integrations/about-ecommerce360)
+
+##### Documents: Invoices, Picking Slips and Shipping Labels
+```
+# https://github.com/spree-contrib/spree_print_invoice
+# bundle && exec rails g spree_print_invoice:install
+# Forked version lifts spree_core version dependency
+gem 'spree_print_invoice',
+    github: 'noname00000123/spree_print_invoice',
+    branch: 'master'
+```    
+
+# Spree References
+http://blog.benmorgan.io/page/4
+Nebulab
+Rails Dog
+
+# Encounters of the Worst Kind
+## Postgres
+Check the relevant ID in spree_countries table
+```
+$ sudo -u postgres psql
+postgres=# \connect theartscene_development
+postgres=# SELECT * FROM spree_countries;
+```
+
+## Postgresql destruction 
+Had trouble dropping the postrgresql database, Rails was keeping database connection open. Have added config/initializers/postgresql_database_tasks.rb to monkeypatch ActiveRecord task close connection and drop.
+Also had to stifle object references in intializers to recreate database - commented out config/initializers/spree.rb, spree_chimpy.rb and devise.rb
+
+```bundle exec rake db:reset --trace``` 
 
 # Running Changes
 Overriden stylesheets
@@ -1088,115 +1624,3 @@ Demonstrate multi domain capability
 - Pricebook
 - Promotions
 
-# Deployment Guide 
-See the official Ubuntu deployment guide [here](https://guides.spreecommerce.com/developer/manual-ubuntu.html)
-
-# Multi-Domain
-Spree is allows multi-store management from a single backend via the [spree-multi-domain](https://github.com/spree-contrib/spree-multi-domain) extension. 
-
-Add gem to Gemfile
-
-```
-gem 'spree_multi_domain',
-    git: 'git://github.com/spree/spree-multi-domain.git'
-```
-
-then
-
-``` $ bundle exec rails g spree_multi_domain:install ```
-
-Each storefront is accessible at its own unique domain.
-
-## DNS configuration
-[Prax](https://github.com/ysbaddaden/prax) is a pure ruby alternative to Pow!! that runs on GNU/Linux. Rack proxy server for development Local Development.
-
-### Install
-
-```
-$ sudo git clone git://github.com/ysbaddaden/prax.git /opt/prax
-$ cd /opt/prax/
-$ ./bin/prax install
-```
-
-```
-$ cd ~/.prax
-$ ln -s ~/Work/myapp .
-$ firefox http://myapp.dev
-```
-
-We're then able to define separate domains per unique storefront. 
-In our case, when we've started the local app server with ```foreman start``` we can visit each of these storefronts with domain names defined in our Spree *Store & Domains* configuration.
-- [The Art Scene: as.dev:3000](as.dev:3000)
-- [Art Basics: ab.dev:3000](ab.dev:3000)
-- [Australian Art Supplies: aas.dev:3000](aas.dev:3000)
-
-Each of the store fronts is namespaced and maintained separately in app/views/spree/[namespace]
-
-Global or shared view files are available at app/views/spree/global
-
-# Authorisation, Permissions and User Roles
-https://github.com/spree/spree_auth_devise
-
-# Pricing
-google_currency throws NoMethod error ```synchronize``` when version other than 3.2.0. This dependency sets spree_core money dependency back to 6.5.0. But doing so permits database seed
-```
-    # https://github.com/spree-contrib/spree_multi_currency/tree/3-0-stable
-    # bundle && bundle exec rails g spree_multi_currency:install
-    gem 'spree_multi_currency',
-        github: 'spree-contrib/spree_multi_currency',
-        branch: '3-0-stable'
-        
-    gem 'google_currency', '3.2.0'
-    
-    # Requires: spree_multi_currency
-    # Price book functionality for running sales, role based, country based pricing etc...
-    # bundle exec rails g spree_price_books:install
-    gem 'spree_price_books',
-        # github: 'noname00000123/spree_price_books'
-        github: 'dickies-co-uk/spree_price_books',
-        branch: '3-0-stable'
-```
-
-# Payments
-https://github.com/railsdog/spree_braintree_cse
-```gem 'spree_braintree-cse'```
-https://www.braintreepayments.com/blog/client-side-encryption/
-
-https://github.com/deseretbook/spree_sale_pricing
-
-# Documents: Invoices, Picking Slips and Shipping Labels
-```
-# https://github.com/spree-contrib/spree_print_invoice
-# bundle && exec rails g spree_print_invoice:install
-# Forked version lifts spree_core version dependency
-gem 'spree_print_invoice',
-    github: 'noname00000123/spree_print_invoice',
-    branch: 'master'
-```    
-## Configuration
-```
-config/initializers/spree.rb
-# Readme outdated, proper configuration below
-Spree::PrintInvoice::Config.set(
-    page_layout: :portrait,
-    page_size: 'A4',
-)
-Spree::PrintInvoice::Config.set(logo_path: '/path/to/public/images/company-logo.png')
-Spree::PrintInvoice::Config.set(store_pdf: true)
-Spree::PrintInvoice::Config.set(storage_path: 'documents/invoices')
-# Spree::PrintInvoice::Config.set(next_number: [1|'your current next invoice number'])
-```
-
-# Shipping
-https://github.com/railsdog/spree_shipping_labels
-
-### Integrating with Mandrill Transactional and MailChimp Campaign Services
-Spree 3 extracted spree_mail_settings in fav our of default Rails ActionMailer.
-TODO confirgure ActionMailer for Devise transactional emails Mandrill SMTP and MailChimp Campaigns. 
-
-- [**MailChimp**](http://mailchimp.com/) & [**Mandrill**](https://www.mandrill.com/)
-- Integration with [Spree Chimpy - Extension](https://github.com/DynamoMTL/spree_chimpy)
-
-Track campaign success with [MailChimp eCommerce360](http://kb.mailchimp.com/integrations/other-integrations/about-ecommerce360)
-
-  

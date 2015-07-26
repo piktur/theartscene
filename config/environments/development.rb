@@ -6,6 +6,10 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  # Ensure Spree::config settings are current as per
+  # https://github.com/spree/spree/issues/1265
+  # config.cache_store = :memory_store
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -13,8 +17,26 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # ===========================================================================
+  # ActionMailer
+  # ===========================================================================
+  # Defined in ApplicationController.mailer_set_url_options before_filter
+  # See app/controllers/application_controller.rb
+  # config.action_mailer.default_url_options    = { host: '' }
+
+  config.action_mailer.delivery_method        = :smtp
+  # Mail will be delivered when perform_deliveries = true
+  config.action_mailer.perform_deliveries     = true
+  config.action_mailer.raise_delivery_errors  = true
+  config.action_mailer.default                charset: 'utf-8'
+  config.action_mailer.smtp_settings = {
+    address:   ENV['SMTP_ADDRESS'],
+    port:      ENV['SMTP_PORT'],
+    domain:    '',
+    user_name: ENV['MANDRILL_USER'],
+    password:  ENV['MANDRILL_API_KEY']
+  }
+  # ===========================================================================
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

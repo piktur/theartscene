@@ -1,22 +1,20 @@
-# Set your full path to application.
-app_dir = File.expand_path('../', __dir__)
+app_dir = File.expand_path('..', __dir__)
 
-if ENV['RAILS_ENV'] == 'development'
-  worker_processes 1
-  logger           Logger.new(STDOUT, STDERR)
-else
-  worker_processes 3
-end
+working_directory app_dir
 
 preload_app       true
 timeout           30
 
-# Fill path to your app
-working_directory app_dir
+if ENV['RAILS_ENV'] == 'production'
+  worker_processes 3
+else # 'development' || 'test'
+  worker_processes 1
+  logger           Logger.new(STDOUT, STDERR)
+  listen           3000, tcp_nopush: true
+end
 
 # Set up socket location
-listen            "#{app_dir}/tmp/sockets/unicorn.sock", :backlog => 64
-listen            3000, :tcp_nopush => true
+listen            "#{app_dir}/tmp/sockets/unicorn.sock", backlog: 64
 
 # Loging
 stderr_path       "#{app_dir}/log/unicorn.stderr.log"

@@ -7,6 +7,10 @@ Rails.application.configure do
   # and recreated between test runs. Don't rely on the data there!
   config.cache_classes = true
 
+  # Ensure Spree::config settings are current as per
+  # https://github.com/spree/spree/issues/1265
+  config.cache_store = :memory_store
+
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.

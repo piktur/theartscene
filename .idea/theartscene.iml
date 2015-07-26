@@ -191,6 +191,7 @@
     <orderEntry type="library" scope="PROVIDED" name="kgio (v2.9.3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.0.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.6.3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mailchimp-api (v2.0.6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mime-types (v2.6.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_portile (v0.6.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.7.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />

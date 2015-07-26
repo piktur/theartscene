@@ -1,35 +1,40 @@
 Spree::Chimpy.config do |config|
-  # your API key as provided by MailChimp
-  config.key = ENV['MAILCHIMP_API_KEY']
+  # MailChimp API key
+  config.key                   = ENV['MAILCHIMP_API_KEY']
 
-  # extra api options for the Mailchimp gem
-  config.api_options = { throws_exceptions: false, timeout: 3600 }
+  # Set MailChimp API options
+  config.api_options           = {
+      throws_exceptions: false,
+      timeout: 3600
+  }
 
-  # name of your list, defaults to "Members"
-  config.list_name = 'The Art Scene'
+  # @default 'Members'
+  config.list_id               = ENV['MAILCHIMP_LIST_ID']
+  config.list_name             = ENV['MAILCHIMP_LIST_NAME']
+  # config.customer_segment_name = 'loyal'
 
-  # Allow users to be subscribed by default. Defaults to false
-  # If you enable this option, it's strongly advised that your enable
-  # double_opt_in as well. Abusing this may cause Mailchimp to suspend your account.
+  config.subscribe_to_list     = false
+  # Auto opt-in
+  # NOTE: double_opt_in should = true when auto opt-in enabled.
+  # @default false
   config.subscribed_by_default = false
+  # Send 'subscription confirmation' email
+  # @default false
+  config.double_opt_in         = false
+  # Send 'welcome' email on subscription
+  # NOTE: Recommended when double_opt_in = false
+  config.send_welcome_email    = true
 
-  # When double-opt is enabled, the user will receive an email
-  # asking to confirm their subscription. Defaults to false
-  config.double_opt_in = false
+  # Store ID. Max 10 characters
+  # @default 'spree'
+  config.store_id             = Spree::Store.current.code
 
-  # Send a welcome email after subscribing to a list.
-  # It is recommended to send on wieh double_opt_in is false.
-  config.send_welcome_email = true
-
-  # id of your store. max 10 letters. defaults to "spree"
-  config.store_id = 'acme'
-
-  # define a list of merge vars:
-  # - key: a unique name that mail chimp uses. 10 letters max
-  # - value: the name of any method on the user class.
-  # make sure to avoid any of these reserved field names:
+  # Define merge vars:
+  # - key: Name the MailChimp variable. Max 10 characters
+  # - value: A Spree::User method.
+  # NOTE: Avoid these reserved field names:
   # http://kb.mailchimp.com/article/i-got-a-message-saying-that-my-list-field-name-is-reserved-and-cant-be-used
-  # default is {'EMAIL' => :email}
+  # @default {'EMAIL' => :email}
   config.merge_vars = {
     'EMAIL' => :email
   }
