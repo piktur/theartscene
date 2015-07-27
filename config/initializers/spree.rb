@@ -49,14 +49,15 @@ Spree.config do |config|
   # postgres=# SELECT * FROM spree_countries;
   # OR perform query, but lets not waste time here
   # Spree::Country.find_by!(iso: 'AU').id
-  config.default_country_id           = 13
+  # See db/default/spree/countries.rb:29
+  # config.default_country_id           = 13
   config.dismissed_spree_alerts       = ''
   config.expedited_exchanges          = false
   config.expedited_exchanges_days_window = 7
   config.last_check_for_spree_alerts  = nil
   config.layout                       = 'spree/layouts/spree_application'
   config.logo                         = 'spree/logo/logo_lo.svg'
-  config.max_level_in_taxons_menu     = 1
+  config.max_level_in_taxons_menu     = 3
   config.orders_per_page              = 15
   config.properties_per_page          = 15
   config.products_per_page            = 15

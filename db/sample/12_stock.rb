@@ -1,7 +1,5 @@
-Spree::Sample.load_sample("variants")
-
-country = Spree::Country.find_by(iso: 'AU')
-state   = Spree::State.find_by(abbr: 'NSW')
+country = Spree::Country.find_by!(iso: 'AU')
+state   = Spree::State.find_by!(abbr: 'NSW')
 location = Spree::StockLocation.first_or_create!(
   name: 'West Ryde',
   address1: '914 Victoria Road',

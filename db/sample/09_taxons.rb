@@ -1,17 +1,15 @@
-Spree::Sample.load_sample("taxonomies")
-Spree::Sample.load_sample("products")
-
-categories = Spree::Taxonomy.find_by_name!("Categories")
-brands     = Spree::Taxonomy.find_by_name!("Brand")
+categories = Spree::Taxonomy.find_by!(name: "Categories")
+brands     = Spree::Taxonomy.find_by!(name: "Brand")
 
 products = { 
-  :wnaoc_tiwh => "Winsor & Newton Artists' Oil Colour Titanium White",
-  :wnaoc_wigy => "Winsor & Newton Artists' Oil Colour Winsor Green (Yellow Shade)"
+  :wnaoc_tiwh => "Winsor & Newton Artists' Oil Colours Titanium White 37mL",
+  :wnaoc_tiwhm => "Winsor & Newton Artists' Oil Colours Titanium White 120mL",
+  :wnaoc_wigy => "Winsor & Newton Artists' Oil Colours Winsor Green (Yellow Shade) 37mL",
+  :wnaoc_wigym => "Winsor & Newton Artists' Oil Colours Winsor Green (Yellow Shade) 120mL"
 }
 
-
 products.each do |key, name|
-  products[key] = Spree::Product.find_by_name!(name)
+  products[key] = Spree::Product.find_by!(name: name)
 end
 
 taxons = [
@@ -21,43 +19,43 @@ taxons = [
     :position => 0
   },
 
-
-
   {
     :name => "Painting",
     :taxonomy => categories,
     :parent => "Categories",
-    :position => 1
+    :position => 0
   },
   {
       :name => "Colour",
       :taxonomy => categories,
       :parent => "Painting",
-      :position => 1,
+      :position => 0,
       :products => []
   },
   {
         :name => "Oils",
         :taxonomy => categories,
         :parent => "Painting",
-        :position => 1,
+        :position => 0,
         :products => [
             products[:wnaoc_tiwh],
-            products[:wnaoc_wigy]
+            products[:wnaoc_tiwhm],
+            products[:wnaoc_wigy],
+            products[:wnaoc_wigym]
         ]
   },
   {
         :name => "Acrylics",
         :taxonomy => categories,
         :parent => "Painting",
-        :position => 2,
+        :position => 1,
         :products => []
   },
   {
         :name => "Pigments",
         :taxonomy => categories,
         :parent => "Painting",
-        :position => 3,
+        :position => 2,
         :products => []
   },
 
@@ -66,21 +64,21 @@ taxons = [
       :name => "Equipment",
       :taxonomy => categories,
       :parent => "Painting",
-      :position => 2,
+      :position => 1,
       :products => []
   },
   {
         :name => "Brushes",
         :taxonomy => categories,
         :parent => "Equipment",
-        :position => 2,
+        :position => 0,
         :products => []
   },
   {
         :name => "Easels",
         :taxonomy => categories,
         :parent => "Equipment",
-        :position => 2,
+        :position => 1,
         :products => []
   },
   {
@@ -98,7 +96,7 @@ taxons = [
       :name => "Drawing",
       :taxonomy => categories,
       :parent => "Categories",
-      :position => 2
+      :position => 1
   },
 
 
@@ -107,7 +105,7 @@ taxons = [
       :name => "Printmaking",
       :taxonomy => categories,
       :parent => "Categories",
-      :position => 3
+      :position => 2
   },
 
 
@@ -116,7 +114,7 @@ taxons = [
       :name => "Sculpture",
       :taxonomy => categories,
       :parent => "Categories",
-      :position => 4
+      :position => 3
   },
 
 
@@ -125,7 +123,7 @@ taxons = [
       :name => "Craft",
       :taxonomy => categories,
       :parent => "Categories",
-      :position => 5
+      :position => 4
   },
 
 
@@ -134,7 +132,7 @@ taxons = [
       :name => "Design & Architecture",
       :taxonomy => categories,
       :parent => "Categories",
-      :position => 6
+      :position => 5
   },
 
 
@@ -143,7 +141,7 @@ taxons = [
       :name => "Books",
       :taxonomy => categories,
       :parent => "Categories",
-      :position => 7
+      :position => 6
   },
 
 
@@ -152,10 +150,8 @@ taxons = [
       :name => "Videos",
       :taxonomy => categories,
       :parent => "Categories",
-      :position => 8
+      :position => 7
   },
-
-
 
   {
       :name => "Gift Vouchers",
@@ -170,14 +166,17 @@ taxons = [
     :taxonomy => brands,
     :position => 1
   },
+
   {
     :name => "Winsor & Newton",
     :taxonomy => brands,
     :parent => "Brands",
-    :position => 1,
+    :position => 0,
     :products => [
-      products[:wnaoc_tiwh],
-      products[:wnaoc_wigy]
+        products[:wnaoc_tiwh],
+        products[:wnaoc_tiwhm],
+        products[:wnaoc_wigy],
+        products[:wnaoc_wigym]
     ]
   }
 ]

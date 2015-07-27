@@ -2,6 +2,10 @@ prototypes = [
   {
     :name => "Paint",
     :properties => ["Manufacturer", "Brand", "Manufacter Code", "Colour", "Description", "Pigments"]
+  },
+  {
+    :name => "Workshop",
+    :properties => ["Date", "Tutor", "Title", "Location", "Skill Level"]
   }
 ]
 

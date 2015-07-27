@@ -1,5 +1,5 @@
-australia = Spree::Country.find_by!(name: 'Australia')
-nsw       = Spree::State.find_by!(name: 'New South Wales')
+australia = Spree::Country.find_or_create_by!(iso: 'AU')
+nsw       = Spree::State.find_or_create_by!(abbr: 'NSW')
 
 # Billing address
 Spree::Address.create!(

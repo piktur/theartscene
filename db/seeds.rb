@@ -6,9 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+#Spree::Core::Engine.load_seed if defined?(Spree::Core)
 
-Spree::Core::Engine.load_seed if defined?(Spree::Core)
+Rake::Task['db:load_dir'].reenable
+Rake::Task['db:load_dir'].invoke(File.join(File.dirname(__FILE__), 'default', 'spree'))
+Rake::Task['db:load_dir'].invoke(File.join(File.dirname(__FILE__), 'sample'))
+
 Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
-
-# Rake::Task['db:load_dir'].reenable
-# Rake::Task['db:load_dir'].invoke(File.join(File.dirname(__FILE__), 'sample'))

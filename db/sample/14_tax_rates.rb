@@ -1,5 +1,5 @@
-australia = Spree::Zone.find_by_name!('Australia')
-goods     = Spree::TaxCategory.find_by_name!('Goods')
+australia = Spree::Zone.find_or_create_by!(name: 'Australia')
+goods     = Spree::TaxCategory.find_by!(name: 'Goods')
 tax_rate  = Spree::TaxRate.create(
   :name         => 'GST',
   :zone         => australia,
