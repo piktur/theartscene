@@ -1,8 +1,8 @@
-default = Spree::ShippingCategory.find_or_create_by!(name: 'Default')
-oversize = Spree::ShippingCategory.find_or_create_by!(name: 'Oversize')
-heavy = Spree::ShippingCategory.find_or_create_by!(name: 'Heavy')
-hazardous = Spree::ShippingCategory.find_or_create_by!(name: 'Hazardous')
-service = Spree::ShippingCategory.find_or_create_by!(name: 'Service')
+default = Spree::ShippingCategory.find_or_create_by!(name: 'default')
+oversize = Spree::ShippingCategory.find_or_create_by!(name: 'oversize')
+heavy = Spree::ShippingCategory.find_or_create_by!(name: 'heavy')
+hazardous = Spree::ShippingCategory.find_or_create_by!(name: 'hazardous')
+service = Spree::ShippingCategory.find_or_create_by!(name: 'service')
 
 Spree::ShippingMethod.create!([
   {

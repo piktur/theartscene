@@ -138,6 +138,7 @@
     <orderEntry type="library" scope="PROVIDED" name="astrolabe (v1.3.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="autoprefixer-rails (v5.2.1.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="awesome_nested_set (v3.0.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="axiom-types (v0.1.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.10, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="binding_of_caller (v0.7.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootstrap-sass (v3.3.5.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -155,6 +156,7 @@
     <orderEntry type="library" scope="PROVIDED" name="cldr-plurals-runtime-rb (v1.0.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="climate_control (v0.0.3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cocaine (v0.5.7, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="coercible (v1.0.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-rails (v4.1.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-script (v2.4.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-script-source (v1.9.1.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -163,12 +165,20 @@
     <orderEntry type="library" scope="PROVIDED" name="css_parser (v1.3.6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug_inspector (v0.0.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="deface (v1.0.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="descendants_tracker (v0.0.4, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise (v3.4.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise-encryptable (v0.1.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.2.5, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="elasticsearch (v1.0.12, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="elasticsearch-api (v1.0.12, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="elasticsearch-model (v0.1.7, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="elasticsearch-rails (v0.1.7, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="elasticsearch-transport (v1.0.12, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="equalizer (v0.0.11, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="excon (v0.45.4, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="execjs (v2.5.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday (v0.9.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffaker (v1.32.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="figaro (v1.1.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="font-awesome-rails (v4.3.0.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -177,13 +187,16 @@
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.3.5, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalize (v5.0.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="google_currency (v3.2.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="hashie (v3.4.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="highline (v1.6.21, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="htmlentities (v4.3.4, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="httparty (v0.13.5, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.7.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n_data (v0.5.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ice_nine (v0.11.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.3.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jquery-rails (v4.0.4, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jquery-turbolinks (v2.1.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jquery-ui-rails (v5.0.5, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json (v1.8.3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="kaminari (v0.16.3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -199,8 +212,10 @@
     <orderEntry type="library" scope="PROVIDED" name="money (v6.5.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.11.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_xml (v0.5.5, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multipart-post (v2.0.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-scp (v1.2.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-ssh (v2.9.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="newrelic_rpm (v3.12.1.298, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.6.6.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="orm_adapter (v0.5.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="paperclip (v4.2.4, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -238,6 +253,7 @@
     <orderEntry type="library" scope="PROVIDED" name="sass-rails (v5.0.3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sdoc (v0.4.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="select2-rails (v3.5.9.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="settingslogic (v2.0.9, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="slim (v3.0.6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="slim_lint (v0.6.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -247,6 +263,7 @@
     <orderEntry type="library" scope="PROVIDED" name="spree_chimpy (v2.0.0.alpha@f255a5, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_cmd (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_core (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="spree_elasticsearch (v3.0.0@53a701, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_frontend (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_gateway (v3.0.0.beta@7301dc, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_i18n (v3.0.0@ef2bd4, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -276,6 +293,7 @@
     <orderEntry type="library" scope="PROVIDED" name="unicorn (v4.9.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="validates_timeliness (v3.0.14, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="versioncake (v2.3.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="virtus (v1.0.5, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="warden (v1.2.3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v2.2.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="xray-rails (v0.1.16, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />

@@ -139,6 +139,10 @@ A selection of companies actively developing with and contributing to Ruby and R
 
 ____
 
+## Frontend design retail Bootstrap demo
+> /Documents/webdev/future_projects/theartscene/demonstrations/www/theartscene/www/
+> /Documents/webdev/future_projects/theartscene/demonstrations/www/theartscene/www/checkout/edit.html
+
 ## Support
 > ##### Administrator Resources
 - [Official Administrator Documentation](https://guides.spreecommerce.com/user/) 
@@ -723,6 +727,16 @@ TODO: Write **export as CSV** task. For transport to Retail POS, Attache etc
 
 ## Stock management
 
+## SEO
+
+```html 
+<body>
+   <script>_gaq.push(['_trackPageview']);</script>
+   ...the rest of the body here...
+</body>
+```
+...also, be sure to modify the Analytics snippet not to do ```'_trackPageview'``` automatically.
+Source [Integrating Turbolinks enabled jQuery apps](https://coderwall.com/p/ypzfdw/faster-page-loads-with-turbolinks)
 ____
 
 ## Order Fullfillment
@@ -792,6 +806,8 @@ TODO restructure and style front/backend views with
 ### Search
 ####  Elasticsearch
 https://github.com/javereec/spree_elasticsearch
+Configuration example provided here 
+http://stackoverflow.com/questions/30079572/filtering-spree-products-by-size-using-elastic-search
 
 #### Solr
 https://github.com/jbrien/spree_sunspot_search

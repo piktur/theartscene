@@ -60,9 +60,19 @@
 # # Expand postcode ranges
 # metro_regions.collect {|i| Range === i ? i.entries : i}.flatten
 
+global = Spree::Zone.create!(
+    name: 'global',
+    description: 'All Countries'
+)
+
+international = Spree::Zone.create!(
+    name: 'international',
+    description: 'International'
+)
+
 national = Spree::Zone.create!(
     name: 'national',
-    description: 'Australia'
+    description: 'National'
 )
 
 inner_states_metro = Spree::Zone.create!(
@@ -80,10 +90,9 @@ outer_states = Spree::Zone.create!(
     description: 'WA, NT & TAS'
 )
 
-international = Spree::Zone.create!(
-    name: 'international',
-    description: 'International'
-)
+global.zone_members.create!(zoneable: Spree::Country.all)
+
+international.zone_members.create!(zoneable: Spree::Country.where.not(iso: 'AU'))
 
 ['NSW', 'QLD', 'VIC', 'SA', 'NT', 'ACT', 'WA', 'TAS'].each do |state|
   national.zone_members.create!(zoneable: Spree::State.find_by!(abbr: state))
@@ -101,4 +110,3 @@ end
   outer_states.zone_members.create!(zoneable: Spree::State.find_by!(abbr: name))
 end
 
-international.zone_members.create!(zoneable: Spree::Country.where.not(iso: 'AU'))

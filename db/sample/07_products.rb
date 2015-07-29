@@ -16,10 +16,16 @@ Surface Sheen: The sheen reflects the pigments used and the different levels of 
 
 products = [
   {
-    :name => "Winsor & Newton Artists' Oil Colours Titanium White 37mL",
-    :tax_category => goods,
-    :shipping_category => shipping_category,
-    :price => 12.40
+    name: "Winsor & Newton Artists' Oil Colours Titanium White 37mL",
+    tax_category: goods,
+    shipping_category: shipping_category,
+    price: 12.40,
+    description: '',
+    permalink: '',
+    available_on: '',
+    deleted_at: '',
+    meta_description: '',
+    meta_keywords: ''
   },
   {
     :name => "Winsor & Newton Artists' Oil Colours Titanium White 120mL",
