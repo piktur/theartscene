@@ -1,3 +1,22 @@
+# See /home/user/Documents/webdev/future_projects/theartscene/spree/theartscene/db/sample/0_zones.rb
+
+# eu_vat = Spree::Zone.create!(name: "EU_VAT", description: "Countries that make up the EU VAT zone.")
+# north_america = Spree::Zone.create!(name: "North America", description: "USA + Canada")
+#
+# ["Poland", "Finland", "Portugal", "Romania", "Germany", "France",
+#  "Slovakia", "Hungary", "Slovenia", "Ireland", "Austria", "Spain",
+#  "Italy", "Belgium", "Sweden", "Latvia", "Bulgaria", "United Kingdom",
+#  "Lithuania", "Cyprus", "Luxembourg", "Malta", "Denmark", "Netherlands",
+#  "Estonia"].
+# each do |name|
+#   eu_vat.zone_members.create!(zoneable: Spree::Country.find_by!(name: name))
+# end
+#
+# ["United States", "Canada"].each do |name|
+#   north_america.zone_members.create!(zoneable: Spree::Country.find_by!(name: name))
+# end
+
+
 # TODO create zones for Metropolitan regions
 # Can a Zone be anything but a Spree::Country or Spree::State? How can we determine Zones by Postcodes.
 # Postcodes ranges as per http://auspost.com.au/parcels-mail/delivery-areas.html
@@ -56,9 +75,9 @@
 # perth = [6000..6005, 6800..6899]
 #
 # # Merge inner_states_metro
-# metro_regions = [sydney, melbourne, brisbane, adelaide].flatten
+# inner_states_metro_post_codes = [sydney, melbourne, brisbane, adelaide].flatten
 # # Expand postcode ranges
-# metro_regions.collect {|i| Range === i ? i.entries : i}.flatten
+# inner_states_metro_post_codes.collect {|i| Range === i ? i.entries : i}.flatten
 
 global = Spree::Zone.create!(
     name: 'global',

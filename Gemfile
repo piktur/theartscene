@@ -47,6 +47,11 @@ gem 'unicorn'
 # gem 'actionpack-page_caching'
 # gem 'actionpack-action_caching'
 
+# CSV importer with optional features for processing large files in parallel,
+# embedded comments, unusual field- and record-separators, flexible mapping
+# of CSV-headers to Hash-keys
+gem 'smarter_csv'
+
 group :development do
   # Model schema visualisation
   gem 'rails-erd'
@@ -187,6 +192,9 @@ gem 'spree',
 
   # https://github.com/spree-contrib/spree_volume_pricing
   # rails generate spree_volume_pricing:install
+  gem 'spree_volume_pricing',
+      github: 'noname00000123/spree_volume_pricing',
+      branch: '3-0-stable'
 
   # https://github.com/jumph4x/spree-product-assembly
   # Use case, school, msa and sale bundles
@@ -321,9 +329,9 @@ gem 'spree',
   # $ bundle install.
   # $ bundle exec rake spree_batch_products:install
   # # bundle exec rake db:migrate
-  # gem 'spree_batch_products',
-  #     github: 'jumph4x/spree-batch-products',
-  #     branch: '3-0-stable'
+  gem 'spree_batch_products',
+      github: 'noname00000123/spree-batch-products',
+      branch: '3-0-stable'
 
   # [Darwin](https://github.com/darwin/csv2json) converts csv to json.
   # With appropriately formed spreadsheet, generate JSON and upload via API.

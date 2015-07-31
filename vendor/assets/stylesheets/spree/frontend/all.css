@@ -8,4 +8,5 @@
  *= require_self
  *= require_tree .
  *= require spree/frontend/spree_price_books
+ *= require spree/elasticsearch
 */

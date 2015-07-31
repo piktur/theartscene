@@ -1580,6 +1580,12 @@ Rails Dog
 
 # Encounters of the Worst Kind
 ## Postgres
+### Common Commands
+```$ sudo -u postgres psql```
+
+```$ sudo /etc/init.d/postgresql stop```
+```$ sudo /etc/init.d/postgresql start```
+
 Check the relevant ID in spree_countries table
 ```
 $ sudo -u postgres psql

@@ -139,6 +139,7 @@
     <orderEntry type="library" scope="PROVIDED" name="autoprefixer-rails (v5.2.1.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="awesome_nested_set (v3.0.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="axiom-types (v0.1.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="batch_factory (v0.1.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.10, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="binding_of_caller (v0.7.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootstrap-sass (v3.3.5.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -241,6 +242,7 @@
     <orderEntry type="library" scope="PROVIDED" name="raindrops (v0.15.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ransack (v1.4.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="responders (v2.1.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="roo (v1.10.3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec (v3.3.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.3.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v3.3.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -248,7 +250,9 @@
     <orderEntry type="library" scope="PROVIDED" name="rspec-support (v3.3.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop (v0.32.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-graphviz (v1.2.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ruby-ole (v1.2.11.8, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-progressbar (v1.7.5, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rubyzip (v0.9.9, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass (v3.4.16, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass-rails (v5.0.3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sdoc (v0.4.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -256,10 +260,13 @@
     <orderEntry type="library" scope="PROVIDED" name="settingslogic (v2.0.9, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="slim (v3.0.6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="slim_lint (v0.6.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="smarter_csv (v1.1.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="spreadsheet (v1.0.4, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_api (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_auth_devise (v3.0.0@b554f3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_backend (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="spree_batch_products (v3.0.0@a142c4, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_chimpy (v2.0.0.alpha@f255a5, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_cmd (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_core (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />

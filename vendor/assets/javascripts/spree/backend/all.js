@@ -33,3 +33,4 @@
 //= require spree/backend/spree_i18n
 
 //= require turbolinks
+//= require spree/backend/spree_volume_pricing

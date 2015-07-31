@@ -10,6 +10,6 @@
 
 Rake::Task['db:load_dir'].reenable
 Rake::Task['db:load_dir'].invoke(File.join(File.dirname(__FILE__), 'default', 'spree'))
-Rake::Task['db:load_dir'].invoke(File.join(File.dirname(__FILE__), 'sample'))
 
+# Spree::Core::Engine.load_seed if defined?(Spree::Core)
 Spree::Auth::Engine.load_seed if defined?(Spree::Auth)

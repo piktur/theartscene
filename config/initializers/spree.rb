@@ -67,7 +67,7 @@ Spree.config do |config|
   config.restock_inventory            = false
   config.return_eligibility_number_of_days = 30
   config.send_core_emails             = true
-  # config.searcher_class               = Spree::Search::Elasticsearch
+  config.searcher_class               = Spree::Search::Elasticsearch
   config.shipping_instructions        = true
   config.show_only_complete_orders_by_default = false
   config.show_variant_full_price      = false

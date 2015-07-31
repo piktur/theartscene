@@ -1,7 +1,7 @@
 Spree::OptionType.create!([
   {
-    :name => "volume",
-    :presentation => "Volume",
+    :name => "colour",
+    :presentation => "Colour",
     :position => 1
   }
 ])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150726052277) do
+ActiveRecord::Schema.define(version: 20150731121324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -446,6 +446,22 @@ ActiveRecord::Schema.define(version: 20150726052277) do
   add_index "spree_prices", ["deleted_at"], name: "index_spree_prices_on_deleted_at", using: :btree
   add_index "spree_prices", ["price_book_id"], name: "index_spree_prices_on_price_book_id", using: :btree
   add_index "spree_prices", ["variant_id", "currency"], name: "index_spree_prices_on_variant_id_and_currency", using: :btree
+
+  create_table "spree_product_datasheets", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "xls_file_name"
+    t.integer  "xls_file_size"
+    t.string   "xls_content_type"
+    t.datetime "processed_at"
+    t.datetime "deleted_at"
+    t.integer  "matched_records"
+    t.integer  "updated_records"
+    t.integer  "failed_records"
+    t.integer  "failed_queries"
+    t.integer  "user_id"
+    t.text     "product_errors"
+  end
 
   create_table "spree_product_option_types", force: :cascade do |t|
     t.integer  "position"
@@ -1181,6 +1197,33 @@ ActiveRecord::Schema.define(version: 20150726052277) do
   add_index "spree_variants", ["sku"], name: "index_spree_variants_on_sku", using: :btree
   add_index "spree_variants", ["tax_category_id"], name: "index_spree_variants_on_tax_category_id", using: :btree
   add_index "spree_variants", ["track_inventory"], name: "index_spree_variants_on_track_inventory", using: :btree
+
+  create_table "spree_variants_volume_price_models", force: :cascade do |t|
+    t.integer "volume_price_model_id"
+    t.integer "variant_id"
+  end
+
+  add_index "spree_variants_volume_price_models", ["variant_id"], name: "variant_id", using: :btree
+  add_index "spree_variants_volume_price_models", ["volume_price_model_id"], name: "volume_price_model_id", using: :btree
+
+  create_table "spree_volume_price_models", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_volume_prices", force: :cascade do |t|
+    t.integer  "variant_id"
+    t.string   "name"
+    t.string   "range"
+    t.decimal  "amount",                precision: 8, scale: 2
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "discount_type"
+    t.integer  "role_id"
+    t.integer  "volume_price_model_id"
+  end
 
   create_table "spree_zone_members", force: :cascade do |t|
     t.integer  "zoneable_id"
