@@ -47,6 +47,8 @@ gem 'unicorn'
 # gem 'actionpack-page_caching'
 # gem 'actionpack-action_caching'
 
+gem 'roo'
+
 # CSV importer with optional features for processing large files in parallel,
 # embedded comments, unusual field- and record-separators, flexible mapping
 # of CSV-headers to Hash-keys
@@ -261,9 +263,9 @@ gem 'spree',
   # https://github.com/railsdog/spree_braintree_cse
   # bundle
   # bundle exec rails g spree_braintree-cse:install
-  # gem 'spree_braintree_cse',
-  #     github: 'railsdog/spree_braintree_cse',
-  #     branch: 'master'
+  gem 'spree_braintree_cse',
+      github: 'noname00000123/spree_braintree_cse',
+      branch: 'master'
 
   # https://github.com/spree-contrib/spree_volume_pricing
   # https://github.com/spree-contrib/spree_comments

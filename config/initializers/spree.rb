@@ -71,7 +71,7 @@ Spree.config do |config|
   config.shipping_instructions        = true
   config.show_only_complete_orders_by_default = false
   config.show_variant_full_price      = false
-  config.show_products_without_price  = false
+  config.show_products_without_price  = true
   config.show_raw_product_description = false
   config.tax_using_ship_address       = true
   config.track_inventory_levels       = true
@@ -101,10 +101,10 @@ Spree.user_class = 'Spree::LegacyUser'
 # ===========================================================================
 Spree::Auth::Config[:confirmable] = false
 
-Spree::Ability.register_ability(Spree::Roles::Customers::RetailCustomer)
-Spree::Ability.register_ability(Spree::Roles::Customers::WholesaleCustomer)
-Spree::Ability.register_ability(Spree::Roles::Staff::SalesRep)
-Spree::Ability.register_ability(Spree::Roles::Staff::Administrator)
+# Spree::Ability.register_ability(Spree::Roles::Customers::RetailCustomer)
+# Spree::Ability.register_ability(Spree::Roles::Customers::WholesaleCustomer)
+# Spree::Ability.register_ability(Spree::Roles::Staff::SalesRep)
+# Spree::Ability.register_ability(Spree::Roles::Staff::Administrator)
 # ===========================================================================
 
 

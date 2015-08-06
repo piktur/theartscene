@@ -714,6 +714,9 @@ ____
     
 
 ## Customer Interaction and Relations
+Additional attributes on User model
+attributes: interests, age, gender
+uses: targeted marketing campaigns featuring products relevant to art practice
 
 ### Authorisation and Authentication
 [Login with Social account](https://github.com/spree-contrib/spree_social)
@@ -767,6 +770,8 @@ https://github.com/spree-contrib/spree_print_invoice
 https://github.com/huoxito/spree-line_item_discount
 
 ## Reports
+- Potent http://www.elasticsearch.org/2011/05/13/data-visualization-with-elasticsearch-and-protovis/
+- Data export and schema linkup for accounting
 - Analytics [Guide](https://spreecommerce.com/blog/ecommerce-tracking-in-spree)
 - Should this be done within Spree, or externally extracting data via API and styling it for consumption at a seperate domain. There are performance concerns here.
 - Sales by time period
@@ -1113,7 +1118,9 @@ Default configuration can be overriden here config/initializers/spree.rb
 - Configure extensions
 Application specific preferences can be defined as per guide here http://blog.crowdint.com/2015/04/16/get-rid-of-your-spree-preferences-headaches-once-and-for-all.html
 
-
+> Configuration master spreadsheet or otherwise wizard should be edited in order of object dependency. ie. Shipping Methods require Shipping Categories and Zones, so Zones and Shipping Categories should be defined first, the user can then select from only the existing Zones and Categories when creating their shipping methods. Likewise when creating Products the user should have only existing Shipping Categories to choose from. Batch Object creation will fail unless this dependency order is preserved.
+> 
+> See db/default/data/_master040815.xlsx
 
 @docs https://guides.spreecommerce.com/developer/preferences.html
 
@@ -1525,6 +1532,8 @@ Global or shared view files are available at app/views/spree/global
 ##### Internationalisation 
 
 ###### Prices
+Price Books can be store explicit prices per product or factor by rate relative to parent book. In our case, explicit prices will be easier to maintain.
+
 google_currency throws NoMethod error ```synchronize``` when version other than 3.2.0. This dependency sets spree_core money dependency back to 6.5.0. But doing so permits database seed
 ```
     # https://github.com/spree-contrib/spree_multi_currency/tree/3-0-stable
@@ -1572,6 +1581,11 @@ gem 'spree_print_invoice',
     github: 'noname00000123/spree_print_invoice',
     branch: 'master'
 ```    
+
+LibreOffice headless documents library for unix
+Cap unix print library
+LPR document to print spooler
+Fresh picking slips as they arrive or delayed job in batches
 
 # Spree References
 http://blog.benmorgan.io/page/4

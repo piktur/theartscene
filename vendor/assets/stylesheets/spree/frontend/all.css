@@ -9,4 +9,5 @@
  *= require_tree .
  *= require spree/frontend/spree_price_books
  *= require spree/elasticsearch
+ *= require spree/frontend/spree_braintree_cse
 */

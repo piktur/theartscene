@@ -1,3 +1,57 @@
+# # Convert raw data to Hash for processing
+# csv = SmarterCSV.process(
+#     File.join(Rails.root, 'db', 'default', 'data', '_PriceBooks.csv')
+# )
+#
+# csv.each do |item|
+#   roles = []
+#   stores = []
+#
+#   if item[:roles]
+#     if item[:roles].include?(',')
+#       item[:roles].gsub(' ', '').split(',').each do |role|
+#         roles << Spree::Role.find_or_create_by!(name: role)
+#       end
+#     else
+#       Spree::Role.find_by!(name: item[:roles])
+#     end
+#   end
+#
+#   if item[:stores]
+#     if item[:stores].include?(',')
+#       item[:stores].gsub(' ', '').split(',').each do |store|
+#         stores << Spree::Store.find_by!(code: store)
+#       end
+#     else
+#       Spree::Store.find_by!(code: item[:stores])
+#     end
+#   end
+#
+#   Spree::PriceBook.create!(
+#     name:         item[:name],
+#     currency:     item[:currency] || Spree::Config.currency,
+#     active_from:  item[:active_from] || 1.day.ago,
+#     active_to:    item[:active_to] || 1.year.from_now,
+#     default:      item[:default] == 1 ? true : false,
+#     parent:       Spree::PriceBook.find_or_create_by!(name: item[:parent], \
+#                     currency: Spree::Config.currency,
+#                     price_adjustment_factor: 0) ||
+#                   Spree::PriceBook.find_or_create_by!(name: 'Default', \
+#                     currency: Spree::Config.currency,
+#                     price_adjustment_factor: 0),
+#     price_adjustment_factor: item[:price_adjustment_factor] || 0,
+#     priority:     item[:priority] || 0,
+#     discount:     item[:discount] == 1 ? true : false,
+#     role_id:      [roles],
+#     store_id:     [stores]
+#   )
+# end
+#
+# Spree::Product.find_each do |product|
+#   pb = Spree::PriceBook.find_by!(name: 'Recommended Retail')
+#   pb.add_product(product)
+# end
+
 wnaoc_tiwh = Spree::Product.find_by!(name: "Winsor & Newton Artists' Oil Colours Titanium White 37mL")
 wnaoc_tiwhm = Spree::Product.find_by!(name: "Winsor & Newton Artists' Oil Colours Titanium White 120mL")
 wnaoc_wigy = Spree::Product.find_by!(name: "Winsor & Newton Artists' Oil Colours Winsor Green (Yellow Shade) 37mL")

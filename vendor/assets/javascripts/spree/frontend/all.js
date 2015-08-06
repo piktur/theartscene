@@ -31,6 +31,7 @@
 //= require spree/frontend/spree_price_books
 //= require spree/frontend/spree_i18n
 //= require spree/elasticsearch
+//= require spree/frontend/spree_braintree_cse
 
 //= require turbolinks
 

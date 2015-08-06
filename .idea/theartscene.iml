@@ -143,6 +143,7 @@
     <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.10, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="binding_of_caller (v0.7.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootstrap-sass (v3.3.5.1, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="braintree (v2.35.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.10.4, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="byebug (v5.0.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -267,6 +268,7 @@
     <orderEntry type="library" scope="PROVIDED" name="spree_auth_devise (v3.0.0@b554f3, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_backend (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_batch_products (v3.0.0@a142c4, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="spree_braintree_cse (v2.3.6@5415b8, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_chimpy (v2.0.0.alpha@f255a5, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_cmd (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_core (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
@@ -278,6 +280,7 @@
     <orderEntry type="library" scope="PROVIDED" name="spree_multi_domain (v1.0.0@3734b6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_price_books (v2.3.0.beta@ff06cb, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spree_sample (v3.0.3.beta@df48e6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="spree_volume_pricing (v3.3.0@7c0446, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spring (v1.3.6, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v3.2.0, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v2.3.2, RVM: ruby-2.2.2 [theartscene]) [gem]" level="application" />

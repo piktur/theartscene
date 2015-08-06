@@ -14,3 +14,9 @@
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore raw user data
+*.ods*
+*.xlsm*
+*.xlsx*
+*.csv*

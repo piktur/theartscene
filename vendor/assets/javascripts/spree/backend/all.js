@@ -31,6 +31,8 @@
 //= require spree/backend/spree_multi_currency
 //= require spree/backend/spree_price_books
 //= require spree/backend/spree_i18n
+//= require spree/backend/spree_volume_pricing
+//= require spree/frontend/spree_braintree_cse
 
 //= require turbolinks
-//= require spree/backend/spree_volume_pricing
+

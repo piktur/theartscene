@@ -22,8 +22,10 @@ Rails.application.configure do
   # ===========================================================================
   # Defined in ApplicationController.mailer_set_url_options before_filter
   # See app/controllers/application_controller.rb
-  # config.action_mailer.default_url_options    = { host: '' }
-
+  config.action_mailer.default_url_options    = {
+    host: '127.0.0.1',
+    port: 3000
+  }
   config.action_mailer.delivery_method        = :smtp
   # Mail will be delivered when perform_deliveries = true
   config.action_mailer.perform_deliveries     = true
@@ -32,7 +34,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:   ENV['SMTP_ADDRESS'],
     port:      ENV['SMTP_PORT'],
-    domain:    '',
+    domain:    'localhost:3000',
     user_name: ENV['MANDRILL_USER'],
     password:  ENV['MANDRILL_API_KEY']
   }
@@ -47,7 +49,7 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true
+  config.assets.debug = false
 
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.

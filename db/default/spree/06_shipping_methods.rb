@@ -1,8 +1,22 @@
-require 'smarter_csv'
+# Convert raw data to Hash for processing
+csv = SmarterCSV.process(
+    File.join(Rails.root, 'db', 'default', 'data', '_ShippingCategories.csv')
+)
+
+csv.each do |shipping_category|
+  Spree::ShippingCategory.find_or_create_by!(name: shipping_category[:name])
+end
+
+# Spree::ShippingCategory.find_or_create_by!(:name => "Default")
+# Spree::ShippingCategory.find_or_create_by!(:name => "versize")
+# Spree::ShippingCategory.find_or_create_by!(:name => "Heavy")
+# Spree::ShippingCategory.find_or_create_by!(:name => "Hazardous")
+# Spree::ShippingCategory.find_or_create_by!(:name => "Service")
+
 
 # Convert raw shipping_methods data to Ruby Object for processing
 csv = SmarterCSV.process(
-    '/home/user/Desktop/artscene/spree/data/configuration/shipping_methods.csv'
+    File.join(Rails.root, 'db', 'default', 'data', '_ShippingMethods.csv')
 )
 
 csv.each do |item|
@@ -13,15 +27,11 @@ csv.each do |item|
     obj.zones       = []
 
     if item[:zones].include?(',')
-      item[:zones].split!(',').each do |zone|
-        obj.zones <<
-          Spree::Zone.find_or_create_by!(name: zone)
+      item[:zones].gsub(' ', '').split!(',').each do |zone|
+        obj.zones << Spree::Zone.find_by!(name: zone)
       end
     else
-      obj.zones <<
-          Spree::Zone.find_or_create_by!(
-            name: item[:zones]
-          )
+      obj.zones << Spree::Zone.find_by!(name: item[:zones])
     end
 
     case item[:calculator]
@@ -67,6 +77,15 @@ csv.each do |item|
     end
 
     obj.tracking_url = item[:tracking_url] || nil
+  end.save!
+end
+
+Spree::Store.all.each do |store|
+  Spree::ShippingMethod.all.each do |shipping_method|
+    Spree::StoreShippingMethod.create!(
+        store: store,
+        shipping_method: shipping_method
+    )
   end
 end
 
