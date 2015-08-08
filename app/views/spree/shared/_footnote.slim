@@ -1,0 +1,54 @@
+#footnote.text-muted role='contentinfo'
+  p
+    a [
+      href='/legal/copyright/'
+      role='contentinfo']
+
+      |&copy;
+
+      span [
+        itemscope=''
+        itemprop='copyrightHolder'
+        itemref='schema-person'
+        itemtype='https://schema.org/Organisation']
+
+        span itemprop='name' The Art Scene
+
+      |&#32;
+
+      span itemprop='copyrightYear' == Time.zone.now
+
+    |&#32;|&#32;
+
+    |ABN:&#32 8888888888
+
+    |&#32;|&#32;
+
+    span
+      /== t('legal.footnote.author.phrase')
+      |&#32;
+
+      span [
+        itemscope=''
+        itemprop='author'
+        itemtype='https://schema.org/Person']
+
+        span itemprop='name'
+          /|#{@site_config.author.name.titleize}
+        |&#32;
+
+        / TODO Kramdown Template has a method to obfuscate mailto links, in the meantime this will do.
+        span.address
+          /== obfuscate_email(@site_config['author']['email'])
+
+    / TODO until I have a presentable website
+    /a [
+      href="#{user_config.author.url}"
+      rel='external'
+      target='_blank']
+
+
+
+
+
+

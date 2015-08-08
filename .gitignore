@@ -15,8 +15,13 @@
 # Ignore application configuration
 /config/application.yml
 
-# Ignore raw user data
+# Ignore raw csv, xls etc. user data
 *.ods*
 *.xlsm*
 *.xlsx*
 *.csv*
+
+# Ignore Xero keys
+privatekey.pem
+publickey.cer
+public_privatekey.pfx

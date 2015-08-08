@@ -1,0 +1,32 @@
+// -- Spree Custom Header and Footer ---------------------
+#spree-header {
+  background: $brand-primary asset-url('spree/frontend/spree_header_alt.jpg') no-repeat center center;
+  background-size: cover;
+  margin-bottom: $line-height-computed;
+
+  #header {
+    background: rgba($gray-darker, 0.4);
+    padding: $line-height-computed 0;
+  }
+
+  #logo {
+    margin-bottom: 10px;
+
+    img {
+      width: 10vw;
+    }
+  }
+
+  .nav a {
+    color: white;
+
+    &:hover, &:focus {
+      background: rgba($gray-darker, 0.4);
+    }
+  }
+
+  .navbar {
+    border: 0;
+    margin-bottom: 0;
+  }
+}

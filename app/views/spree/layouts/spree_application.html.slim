@@ -1,0 +1,46 @@
+doctype html
+
+== render partial: 'spree/shared/html_tag'
+
+html.no-js lang="#{I18n.locale}"
+
+  head data-hook='inside_head'
+    == render partial: 'spree/shared/head'
+    script
+      |
+        $("#search").typeahead({
+          name: "products",
+          remote: "/products/autocomplete?query=%QUERY"
+        });
+
+  body.body_class [
+    id="#{@body_id || 'default'}"
+    data-hook='body']
+
+    /== render partial: 'spree/shared/google_analytics.js'
+
+    == render partial: 'spree/shared/header'
+
+    .container-fluid
+      .row data-hook=''
+
+        == breadcrumbs(@taxon)
+
+        == render partial: 'spree/shared/sidebar' if content_for? :sidebar
+
+        #content [
+          class="#{!content_for?(:sidebar) ? 'col-sm-12' : 'col-sm-8 col-md-9'}"
+          data-hook='']
+
+          == flash_messages
+
+          == yield
+
+        == yield :templates
+
+    == render partial: 'spree/shared/footer'
+
+/ Initialise interactive ruby console within view context for development mode
+  only
+- if Rails.env == 'development'
+  - console

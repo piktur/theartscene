@@ -9,6 +9,8 @@ SmarterCSV.process(data).each do |item|
       @root = value
       @parent = value
 
+      # TODO set store_id
+
       taxons << {
         name:         value,
         taxonomy:     @root,
@@ -71,6 +73,22 @@ taxons.uniq.each do |taxon|
     Spree::Taxon.create!(taxon)
   end
 end
+
+# ===========================================================================
+# == Associate Stores and relevant Taxonomies
+# TODO ensre taxonomy are assigned to a store
+store_ids = []
+
+Spree::Store.all.each do |store|
+  store_ids << store.id
+
+  Spree::Taxonomy.all.each do |taxonomy|
+    taxonomy.store_ids = 1
+    taxonomy.save!
+  end
+end
+
+
 
 # ===========================================================================
 # == Output Taxons as csv

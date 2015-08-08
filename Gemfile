@@ -61,6 +61,9 @@ group :development do
   # For debugging view files in browser
   gem 'xray-rails'
 
+  # Interactive ruby console in the browser
+  gem 'web-console', '~> 2.0'
+
   # Use Capistrano for deployment
   gem 'capistrano-rails'
 end
@@ -92,7 +95,7 @@ gem 'spree',
     branch: '3-0-stable'
 
 # ===========================================================================
-  # UI
+# == UI
   # https://github.com/javereec/spree_elasticsearch
   # bundle
   # bundle exec rails g spree_elasticsearch:install
@@ -107,7 +110,7 @@ gem 'spree',
 
 
 # ===========================================================================
-  # AUTH
+# == AUTH
 
   # bundle exec rake spree_auth:install:migrations
   # bundle exec rake db:migrate
@@ -135,7 +138,7 @@ gem 'spree',
 
 
 # ===========================================================================
-  # MAIL
+# == MAIL
 
   # gem 'spree_mail_settings',
   #     github: 'noname00000123/spree_mail_settings',
@@ -162,7 +165,7 @@ gem 'spree',
 
 
 # ===========================================================================
-  # PRICING
+# == PRICING
 
   # https://github.com/spree-contrib/spree-multi-domain
   # bundle exec rails g spree_multi_domain:install
@@ -204,7 +207,7 @@ gem 'spree',
 
 
 # ===========================================================================
-  # CONTENT MANAGEMENT AND CREATION
+# == CONTENT MANAGEMENT AND CREATION
 
   # bundle exec rails g spree_i18n:install
   gem 'spree_i18n',
@@ -231,13 +234,16 @@ gem 'spree',
 
 
 # ===========================================================================
-  # CHECKOUT
+# == CHECKOUT
 
-  # Spree Extensions
   # rails g spree_gateway:install
   gem 'spree_gateway',
       github: 'noname00000123/spree_gateway',
       branch: '3-0-stable'
+
+  # bundle exec rails g spree_zones_by_zip_code:install
+  # gem 'spree_zones_by_zip_code',
+  #    github: 'noname00000123/spree_zones_by_zip_code'
 
   # https://github.com/spree-contrib/spree_print_invoice
   # bundle && exec rails g spree_print_invoice:install
@@ -280,9 +286,12 @@ gem 'spree',
   # https://github.com/railsdog/spree_shipping_labels
 # ===========================================================================
 
+# ===========================================================================
+# == ACCOUNTING
+gem 'xeroizer'
 
 # ===========================================================================
-  # SEO
+# == SEO
 
   # https://github.com/jumph4x/spree-google-base/tree/3-0-rc
   # $ bundle install
@@ -294,7 +303,7 @@ gem 'spree',
 
 
 # ===========================================================================
-  # REPORTS
+# == REPORTS
 
   # https://github.com/nebulab/spree_simple_reports/tree/master
   # bundle exec rails g spree_simple_reports:install
@@ -307,6 +316,8 @@ gem 'spree',
   #   - roo
   #   - [query_report](http://ashrafuzzaman.github.io/query_report/)
 
+  gem "chartkick"
+
   # rails generate spree_pos:install
   # gem 'spree_pos',
   #     github: 'CodeCantor/spree-pos'
@@ -317,7 +328,7 @@ gem 'spree',
 
 
 # ===========================================================================
-  # DATA
+# == DATA
 
   # Seems some a kind of data validation, should probably just validate data
   # Within spreadsheet. But otherwise buggy
@@ -342,7 +353,7 @@ gem 'spree',
 
 
 # ===========================================================================
-  # DEV OPS
+# == DEV OPS
 
   # https://github.com/nebulab/spree-garbage-cleaner
   # Quite old, but may serve as an example to follow

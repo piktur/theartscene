@@ -1,0 +1,38 @@
+- content_for :page_title do
+  = Spree.t(:reports)
+
+/ TODO get route to report json endpoint
+/ ie. spree.admin_reports_url
+  TODO this is just a dumb test to prove that it works, we'd come up
+  with far more useful reports later
+/= column_chart Spree::User.all.group(:created_at).count
+
+figure
+  = column_chart spree.new_users_by_date_admin_reports_path,
+  library: {width: 500},
+  id: 'report-new-users'
+  figcaption Example of a graph rendered with google graphs
+
+
+/= pie_chart spree.products_by_category_admin_reports_path,
+/  library: {width: 500},
+/  min: 1,
+/  max: 4,
+/  id: 'report-new-users',
+/  height: '20vh'
+
+table.table
+  thead
+    tr data-hook="reports_header"
+      th
+        = Spree.t(:name)
+      th
+        = Spree.t(:description)
+
+  tbody
+    - @reports.each do |key, value|
+      tr data-hook="reports_row"
+        td
+          = link_to value[:name], send("#{key}_admin_reports_url".to_sym)
+        td
+          = value[:description]

@@ -8,7 +8,9 @@ Bundler.require(*Rails.groups)
 
 module Theartscene
   class Application < Rails::Application
-    
+
+    config.assets.precompile += %w( *.jpg )
+
     config.to_prepare do
       # Load application's model / class decorators
       Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|

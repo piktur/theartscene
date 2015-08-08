@@ -730,7 +730,22 @@ TODO: Write **export as CSV** task. For transport to Retail POS, Attache etc
 
 ## Stock management
 
+## Accounting
+Xero
+
+### Generating the OpenSSL certificate
+``` 
+openssl genrsa -out privatekey.pem 1024
+openssl req -newkey rsa:1024 -x509 -key privatekey.pem -out publickey.cer -days 365
+openssl pkcs12 -export -out public_privatekey.pfx -inkey privatekey.pem -in publickey.cer
+```
+
+Registered TheArtScene_Development Xero private app
+API Endpoint https://api.xero.com/api.xro/2.0/
+
 ## SEO
+### Google Keyword research tools
+https://www.google.com/trends/explore#q=kids%20art%20supplies%2C%20childrens%20art%20supplies&cmpt=q&tz=Etc%2FGMT-10
 
 ```html 
 <body>
@@ -770,7 +785,9 @@ https://github.com/spree-contrib/spree_print_invoice
 https://github.com/huoxito/spree-line_item_discount
 
 ## Reports
-- Potent http://www.elasticsearch.org/2011/05/13/data-visualization-with-elasticsearch-and-protovis/
+Awesome google charts gem https://github.com/ankane/chartkick
+
+- Potential http://www.elasticsearch.org/2011/05/13/data-visualization-with-elasticsearch-and-protovis/
 - Data export and schema linkup for accounting
 - Analytics [Guide](https://spreecommerce.com/blog/ecommerce-tracking-in-spree)
 - Should this be done within Spree, or externally extracting data via API and styling it for consumption at a seperate domain. There are performance concerns here.
@@ -809,12 +826,120 @@ TODO restructure and style front/backend views with
 - Turbolinks + Bootstrap
 
 ### Search
-####  Elasticsearch
+#### Full text search with Elasticsearch
 https://github.com/javereec/spree_elasticsearch
 Configuration example provided here 
 http://stackoverflow.com/questions/30079572/filtering-spree-products-by-size-using-elastic-search
 
-#### Solr
+Search box typehead.js http://twitter.github.io/typeahead.js/
+
+##### Chewy wrapper for elasticsearch-rails 
+See https://github.com/toptal/chewy
+
+> Elasticsearch > Elasticsearch-rails > Chewy > Rails
+
+###### Why?
+1. Every index is observable by all the related models.
+Most indexed models are related to each other. And sometimes, it’s necessary to denormalize this related data and bind it to the same object (e.g., if you want to index an array of tags together with their associated article). Chewy allows you to specify an updatable index for every model, so corresponding articles will be reindexed whenever a relevant tag is updated.
+Index classes are independent from ORM/ODM models.
+
+3. With this enhancement, implementing cross-model autocompletion, for example, is much easier. You can just define an index and work with it in object-oriented fashion. Unlike other clients, the Chewy gem removes the need to manually implement index classes, data import callbacks, and other components.
+Bulk import is everywhere.
+
+4. Chewy utilizes the bulk Elasticsearch API for full reindexing and index updates. It also utilizes the concept of atomic updates, collecting changed objects within an atomic block and updating them all at once.
+Chewy provides an AR-style query DSL.
+
+5. By being chainable, mergable, and lazy, this enhancement allows queries to be produced in a more efficient manner.
+
+Refer to implementation guides [here](https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-model#updating-the-documents-in-the-index)
+
+& an excellent guide on impplementation here
+Good: http://www.dainjar.us/blog_posts/elasticsearch-rails
+Good: http://www.sitepoint.com/full-text-search-rails-elasticsearch/
+http://www.codinginthecrease.com/news_article/show/409843?referrer_id=948927
+http://stackoverflow.com/questions/30079572/filtering-spree-products-by-size-using-elastic-search
+
+https://github.com/javereec/spree_elasticsearch/issues/22
+
+Refer to elasticsearch configuration here **config/application.rb:29**
+
+##### Structure the results payload
+
+See spree_elasticsearch/app/models/spree/product_decorator.rb
+For full control on the payload overwrite the as_indexed_json method
+
+```
+
+class Spree::Product < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+  
+  def as_indexed_json(options={})
+    {
+        "title" => title,
+        "author_name" => author.name
+    }
+  end
+end
+  
+```
+
+##### Create index
+```Spree::Product.__elasticsearch__.create_index! force: true```
+
+To test search results
+
+```
+$ cd /Documents/webdev/future_projects/theartscene/spree/elasticsearch-1.7.1
+$ elasticsearch/bin
+```
+In rails console ```rails c```
+
+```ruby
+> Spree::Product.search('[search_term]').map{|record| record.[attribute]}
+==> [...found records]```
+
+See config/application.rb
+
+```ruby
+unless Elasticsearch::Model.client.indices.exists \
+  index: Spree::ElasticsearchSettings.index
+  
+  Elasticsearch::Model.client.indices.create \
+    index: Spree::ElasticsearchSettings.index,
+    body: {
+      settings: {
+        number_of_shards: 1,
+        number_of_replicas: 0,
+        analysis: {
+          analyzer: {
+            nGram_analyzer: {
+              type: 'custom',
+              filter: ['lowercase', 'asciifolding', 'nGram_filter'],
+              tokenizer: 'whitespace'
+            },
+            whitespace_analyzer: {
+              type: 'custom',
+              filter: ['lowercase', 'asciifolding'],
+              tokenizer: 'whitespace'
+            }
+          },
+          filter: {
+            nGram_filter: {
+              max_gram: '20',
+              min_gram: '3',
+              type: 'nGram',
+              token_chars: ['letter', 'digit', 'punctuation', 'symbol']
+            }
+          }
+        }
+      },
+      mappings: Spree::Product.mappings.to_hash
+    }
+end
+
+```
+#### or Solr
 https://github.com/jbrien/spree_sunspot_search
 http://jacopretorius.net/2013/10/integrating-solr-search-with-spree.html
 
@@ -924,8 +1049,22 @@ https://guides.spreecommerce.com/developer/navigating.html#layout-and-structure
 
 ```rspec --init``` to set up RSpec
 
+append ```require 'spree_price_books/factories'``` to test_helper.rb
 
-require 'spree_price_books/factories'
+##### Spree Feature testing
+To test
+- elasticsearch
+
+##### Spree Integration testing
+- look closely at seed data db/default/spree/
+  - account for worst case scenarios
+    - wholesale prices in retail store
+      **scenario** retail price is less than wholesale
+      **scenario** wholesale price is greater than retail
+      **scenario** retail price is missing
+      
+- test order of object creation from seed data
+- ensure dependencies exist and determine what to do in case of failure
 
 ##### Spree Unit testing
 
@@ -1073,6 +1212,7 @@ require 'spree_price_books/factories'
     ENTRYPOINT /usr/bin/start-server
 
 ```
+
 ### Services (job queues, cache servers, search engines, etc.)
 
 ### Deployment instructions
@@ -1562,6 +1702,8 @@ https://github.com/deseretbook/spree_sale_pricing
 
 ##### Shipping
 https://github.com/railsdog/spree_shipping_labels
+Spree shipping methods via postcode zones 
+https://github.com/vlledo/spree_zones_by_zip_code
 
 ##### Integrating with Mandrill Transactional and MailChimp Campaign Services
 Spree 3 extracted spree_mail_settings in fav our of default Rails ActionMailer.
@@ -1659,4 +1801,9 @@ Demonstrate multi domain capability
 - Unique Styling per domain
 - Pricebook
 - Promotions
+
+
+## Tasks, DelayedJobs and Tools
+TODO Is it necessary to require these?
+require useful gem tasks here Rakefile:4
 

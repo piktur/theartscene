@@ -1,0 +1,67 @@
+doctype html
+
+html.no-js lang="#{I18n.locale}"
+
+  head data-hook='admin_inside_head'
+    = render partial: 'spree/admin/shared/head'
+    = javascript_include_tag '//www.google.com/jsapi', 'chartkick'
+    / OR
+    / = javascript_include_tag 'path/to/highcharts.js', 'chartkick'
+
+  body.admin
+    / Loading progress bars
+    #progress
+      .alert.alert-info.alert-progress
+        .spinner
+          |#{Spree.t(:loading)}...
+
+        .progress-message
+          |#{Spree.t(:loading)}...
+
+    / Header navbar
+    = render partial: 'spree/admin/shared/header'
+
+    #wrapper class="container-fluid #{wrapper_classes}"
+      .row
+        #main-sidebar.col-sm-3.col-md-2.hidden-xs.sidebar [
+          data-hook="admin_tabs"]
+          / Content
+          = render partial: 'spree/admin/shared/main_menu'
+
+        #main-part class="#{main_part_classes} main"
+          / Content header (page title/actions)
+          = render partial: 'spree/admin/shared/content_header'
+
+          .row
+            / Alerts
+            = flash_alert(flash)
+            = render partial: 'spree/admin/shared/alert',
+              collection: session[:alerts]
+
+            / Main content
+            ruby:
+              klass =
+                if content_for? :sidebar
+                  'with-sidebar col-md-9 col-sm-8'
+                else
+                  'col-sm-12'
+                end
+
+            #content class="#{klass}" data-hook=''
+              - if content_for?(:table_filter)
+                = render partial: 'spree/admin/shared/table_filter'
+
+              = yield
+
+            / Inner aside
+            - if content_for?(:sidebar)
+              .col-md-3.col-sm-4
+                = render partial: 'spree/admin/shared/sidebar'
+
+    / Insert footer scripts here
+    div data-hook='admin_footer_scripts'
+
+/ Initialise interactive ruby console within view context for development mode
+  only
+- if Rails.env == 'development'
+  - console
