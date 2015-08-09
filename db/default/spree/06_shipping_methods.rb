@@ -281,3 +281,16 @@ end
 # }
 # service.calculator.save!
 # service.save!
+
+# # =============================================================================
+#   # Shipping Methods
+#
+# Spree::StoreShippingMethod.create([
+#     {
+#         shipping_method: Spree::PriceBook.find_or_create_by!(name: 'Retail'),
+#         store: Spree::Store.find_by!(code: 'as'),
+#         #active: true,
+#         #priority: 1
+#     }
+# ])
+#

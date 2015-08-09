@@ -15,7 +15,7 @@
 
   # Custom Settings
   # In order to initialize a custom setting do:
-  # @example config.setting_name = 'new value'
+  # @example config.Spreesetting_name = 'new value'
   # @example config.track_inventory_levels = false
 # ===========================================================================
 
@@ -55,7 +55,7 @@ Spree.config do |config|
   config.expedited_exchanges          = false
   config.expedited_exchanges_days_window = 7
   config.last_check_for_spree_alerts  = nil
-  config.layout                       = 'spree/layouts/spree_application'
+  config.layout                       = "spree/layouts/#{Spree::Store.current.code}/spree_application"
   config.logo                         = 'spree/logo/logo_lo.svg'
   config.max_level_in_taxons_menu     = 3
   config.orders_per_page              = 15
@@ -67,7 +67,10 @@ Spree.config do |config|
   config.restock_inventory            = false
   config.return_eligibility_number_of_days = 30
   config.send_core_emails             = true
-  config.searcher_class               = Spree::Search::Elasticsearch
+  # TODO spree-multi-domain extension defines searcher class in an initializer
+  # Giving it precedence of over configuration specified here. Will define
+  # searcher_class in application.rb instead
+  # config.searcher_class               = Spree::Search::Elasticsearch
   config.shipping_instructions        = true
   config.show_only_complete_orders_by_default = false
   config.show_variant_full_price      = false
@@ -87,6 +90,27 @@ Spree.config do |config|
   # config.attachment_default_style
 end
 
+# ===========================================================================
+# Custom Preferences
+# ===========================================================================
+require 'spree/custom_preferences'
+
+Theartscene::Config = Spree::CustomPreferences.new
+
+# Seperate the development domain from public domain
+dev_domain = Spree::Store.current.url.split(',').select do |url|
+  url if url.include?("#{Spree::Store.current.code}.dev")
+end.first
+
+public_domain = Spree::Store.current.url.split(',').select do |url|
+  url unless url.include?("#{Spree::Store.current.code}.dev")
+end.first
+
+if Rails.env.development? || Rails.env.test?
+  Theartscene::Config[:domain] = dev_domain
+else
+  Theartscene::Config[:domain] = public_domain
+end
 
 # ===========================================================================
   # Spree::User

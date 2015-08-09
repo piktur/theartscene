@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731121324) do
+ActiveRecord::Schema.define(version: 20150808040401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -995,6 +995,14 @@ ActiveRecord::Schema.define(version: 20150731121324) do
   add_index "spree_store_shipping_methods", ["shipping_method_id"], name: "index_spree_store_shipping_methods_on_shipping_method_id", using: :btree
   add_index "spree_store_shipping_methods", ["store_id"], name: "index_spree_store_shipping_methods_on_store_id", using: :btree
 
+  create_table "spree_store_taxonomies", id: false, force: :cascade do |t|
+    t.integer "store_id",    null: false
+    t.integer "taxonomy_id", null: false
+  end
+
+  add_index "spree_store_taxonomies", ["store_id", "taxonomy_id"], name: "index_spree_store_taxonomies_on_store_id_and_taxonomy_id", using: :btree
+  add_index "spree_store_taxonomies", ["taxonomy_id", "store_id"], name: "index_spree_store_taxonomies_on_taxonomy_id_and_store_id", using: :btree
+
   create_table "spree_stores", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
@@ -1066,11 +1074,9 @@ ActiveRecord::Schema.define(version: 20150731121324) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "position",   default: 0
-    t.integer  "store_id"
   end
 
   add_index "spree_taxonomies", ["position"], name: "index_spree_taxonomies_on_position", using: :btree
-  add_index "spree_taxonomies", ["store_id"], name: "index_spree_taxonomies_on_store_id", using: :btree
 
   create_table "spree_taxonomy_translations", force: :cascade do |t|
     t.integer  "spree_taxonomy_id"

@@ -185,7 +185,8 @@ gem 'spree',
 
   # https://github.com/dickies-co-uk/spree_price_books
   # Requires: spree_multi_currency
-  # Price book functionality for running sales, role based, country based pricing etc...
+  # Price book functionality for running sales, role based, country based
+  # pricing etc...
   # bundle exec rails g spree_price_books:install
   # And to seed currency rates
   # bundle exec rake price_books:currency_rates
@@ -201,6 +202,11 @@ gem 'spree',
       github: 'noname00000123/spree_volume_pricing',
       branch: '3-0-stable'
 
+  # Hide pricing for non-registered users, useful for wholesale and school
+  # shopfronts
+  # gem 'spree_price_show'
+  #      github: 'noname00000123/spree_price_show'
+
   # https://github.com/jumph4x/spree-product-assembly
   # Use case, school, msa and sale bundles
 # ===========================================================================
@@ -213,6 +219,8 @@ gem 'spree',
   gem 'spree_i18n',
       github: 'noname00000123/spree_i18n',
       branch: '3-0-stable'
+
+  # gem 'comfortable_mexican_sofa', '~> 1.12.0'
 
   # gem 'spree_static_content',
   #     github: 'spree-contrib/spree_static_content',

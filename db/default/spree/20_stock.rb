@@ -24,6 +24,15 @@ csv.each do |item|
   )
 end
 
+Spree::Variant.all.each do |variant|
+  variant.stock_items.each do |stock_item|
+    Spree::StockMovement.create(
+      quantity: 50,
+      stock_item: stock_item
+    )
+  end
+end
+
 # state   = Spree::State.find_by!(abbr: 'NSW')
 #
 # Spree::StockLocation.create!(
@@ -35,12 +44,3 @@ end
 #   state: state,
 #   active: true
 # )
-
-Spree::Variant.all.each do |variant|
-  variant.stock_items.each do |stock_item|
-    Spree::StockMovement.create(
-      quantity: 10,
-      stock_item: stock_item
-    )
-  end
-end

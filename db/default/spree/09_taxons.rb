@@ -64,31 +64,69 @@ end
 
 # ===========================================================================
 # == Create DB records
-taxons.uniq.each do |taxon|
-  taxon[:taxonomy] = Spree::Taxonomy.find_or_create_by!(name: taxon[:taxonomy])
+taxons = taxons.uniq!
 
-  if taxon[:parent]
-    taxon[:parent] = Spree::Taxon.find_or_create_by!(name: taxon[:parent])
+@existent_taxons = []
 
-    Spree::Taxon.create!(taxon)
+until taxons.empty?
+  taxons.reject! do |taxon|
+
+    # Create taxonomies first
+    if taxon[:parent].blank?
+      taxonomy = Spree::Taxonomy.create!(
+          name: taxon[:name],
+          position: taxon[:position]
+      )
+
+      taxon[:taxonomy] = Spree::Taxonomy.find_by!(id: taxonomy.id)
+      taxon[:parent] = nil
+
+      Spree::Taxon.create!(taxon)
+
+      Spree::Store.all.each do |store|
+        Spree::StoreTaxonomy.find_or_create_by!(
+          store_id: store.id,
+          taxonomy_id: taxonomy.id
+        )
+      end
+
+      @existent_taxons << taxon[:name]
+
+      taxon
+
+    # Create taxonomies first
+    elsif @existent_taxons.include?(taxon[:parent])
+      taxon[:taxonomy] = Spree::Taxonomy.find_by!(name: taxon[:taxonomy])
+      taxon[:parent] = Spree::Taxon.find_by(name: taxon[:parent])
+
+      Spree::Taxon.find_by(name: taxon[:name]) || Spree::Taxon.create!(taxon)
+
+      @existent_taxons << taxon[:name]
+
+      taxon
+
+    end
   end
 end
 
 # ===========================================================================
 # == Associate Stores and relevant Taxonomies
-# TODO ensre taxonomy are assigned to a store
-store_ids = []
+# TODO ensre taxonomy are assigned to a store, it is possible with current
+# spree_multi_domain gem to assign multiple stores to a taxonomy. Am testing
+# many_to_many or has_and_belongs_to_many association. TODO commit to clone
+# Spree::Taxonomy.all.each do |t|
+#   Spree::Store.all.each do |s|
+#     Spree::StoreTaxonomy.create!(
+#       store: s,
+#       taxonomy: t
+#     )
+#   end
+# end
 
-Spree::Store.all.each do |store|
-  store_ids << store.id
-
-  Spree::Taxonomy.all.each do |taxonomy|
-    taxonomy.store_ids = 1
-    taxonomy.save!
-  end
-end
-
-
+# Spree::Taxonomy.all.each do |taxonomy|
+#   taxonomy.store_ids = 1
+#   taxonomy.save!
+# end
 
 # ===========================================================================
 # == Output Taxons as csv

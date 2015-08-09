@@ -6,13 +6,6 @@ html.no-js lang="#{I18n.locale}"
 
   head data-hook='inside_head'
     == render partial: 'spree/shared/head'
-    / TODO properly configure search typehead
-    /script
-    /  |
-    /    $("#search").typeahead({
-    /      name: "products",
-    /      remote: "/products/autocomplete?query=%QUERY"
-    /    });
 
   body.body_class [
     id="#{@body_id || 'default'}"
@@ -24,7 +17,6 @@ html.no-js lang="#{I18n.locale}"
 
     .container-fluid
       .row data-hook=''
-
         == breadcrumbs(@taxon)
 
         == render partial: 'spree/shared/sidebar' if content_for? :sidebar

@@ -21,3 +21,17 @@ Spree::Store.all.each do |store|
       payment_method: check
   )
 end
+
+
+# # =============================================================================
+#   # Payment Methods
+#
+# Spree::StorePaymentMethod.create([
+#    {
+#        payment_method: Spree::PriceBook.find_or_create_by!(name: 'Retail'),
+#        store: Spree::Store.find_by!(code: 'as'),
+#        #active: true,
+#        #priority: 1
+#    }
+# ])
+#

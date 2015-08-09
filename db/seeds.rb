@@ -11,10 +11,9 @@ data      = File.join(Rails.root, 'db', 'default', 'data')
 factories = File.join(Rails.root, 'db', 'default', 'spree')
 
 # ===========================================================================
-
-# Seed spreadsheet containing data for configurable Spree Objects,
-# Object per Sheet
-# Have Roo convert the spreadsheet to Ruby Objects and store it in memory
+# == Generate CSV from master.xlsx worksheets
+# Roo will convert the spreadsheet to Ruby Objects
+# We then generate csv files from each worksheet
 xlsx = Roo::Excelx.new(File.join(data, '_master040815.xlsx'))
 
 # Convert each sheet to CSV and output to a single file per object
@@ -29,8 +28,9 @@ xlsx.sheets.each do |sheet|
 end
 # ===========================================================================
 
+# Spree::Core::Engine.load_seed if defined?(Spree::Core)
+Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
+
 Rake::Task['db:load_dir'].reenable
 Rake::Task['db:load_dir'].invoke(factories)
 
-# Spree::Core::Engine.load_seed if defined?(Spree::Core)
-Spree::Auth::Engine.load_seed if defined?(Spree::Auth)

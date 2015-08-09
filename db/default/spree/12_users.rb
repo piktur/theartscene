@@ -1,4 +1,4 @@
-# Convert raw data to Hash for processing
+#Convert raw data to Hash for processing
 # csv = SmarterCSV.process(
 #     File.join(Rails.root, 'db', 'default', 'data', '_Users.csv')
 # )
@@ -6,7 +6,7 @@
 # csv.each do |item|
 #   country = Spree::Country.find_by!(iso: item[:country])
 #
-#   if item[:active] == "TRUE"
+#   if item[:active] == 1
 #     Spree::User.find_or_create_by!(
 #       email:        item[:email],
 #       # encrypted_password: 'spree123',

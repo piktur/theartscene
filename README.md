@@ -831,6 +831,19 @@ https://github.com/javereec/spree_elasticsearch
 Configuration example provided here 
 http://stackoverflow.com/questions/30079572/filtering-spree-products-by-size-using-elastic-search
 
+> ##### Ruby API 
+> https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/_the_ruby_client.html
+
+> Note: extension conflicts with Spree-Multi-Domain searcher class
+> See https://github.com/noname00000123/spree-multi-domain/blob/master/lib/spree_multi_domain/engine.rb
+> 
+>  Override with 
+>  ```ruby 
+>  # application.rb
+>  
+>  Spree::Config.searcher_class = Spree::Search::Elasticsearch
+> ```
+ 
 Search box typehead.js http://twitter.github.io/typeahead.js/
 
 ##### Chewy wrapper for elasticsearch-rails 
@@ -1755,6 +1768,21 @@ Also had to stifle object references in intializers to recreate database - comme
 
 ```bundle exec rake db:reset --trace``` 
 
+## Spring focus
+Spring is a Rails application preloader. It speeds up development by keeping your application running in the background so you don't need to boot it every time you run a test, rake task or migration.
+
+Define watched config files and initializers to ensure current state here config/initializers/spring.rb 
+Otherwise ```$ bin/spring stop``` to force app reload.
+
+For example changes to **figaro** secrets store would be ahead of spring's cached app state and therefore missed. 
+'application.yml' is now watched, see config/initializers/spring.rb 
+```ruby 
+# Ensure env variables are current
+if defined? Spring
+  Spring.watch 'config/application.yml'
+end
+```
+
 # Running Changes
 Overriden stylesheets
 componentised stylesheets in vendor/stylesheets/spree/frontend/components
@@ -1807,3 +1835,16 @@ Demonstrate multi domain capability
 TODO Is it necessary to require these?
 require useful gem tasks here Rakefile:4
 
+## Gem Overides to commit to forked repositories
+### spree_multi_domain
+#### Issue
+AFAIK gem does not support many_to_many association between Spree::Store and Spree::Taxonomy.
+#### Fix
+Create joins table for stores and taxonomies
+Modified 
+
+> #### Changes
+> app/helpers/spree/products_helper_decorator.rb
+> lib/spree_multi_domain/multi_domain_helpers.rb
+> app/models/spree/store_taxonomy.rb
+> db/migrate/20150808040401_create_join_table_spree_store_taxonomies.rb

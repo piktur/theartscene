@@ -11,8 +11,8 @@ SmarterCSV.process(data).each do |item|
     item[:zone_members].gsub(' ', '').split(',').each do |state|
       zone.zone_members.create!(
           zoneable: Spree::State.find_by!(
-              abbr: state,
-              country: Spree::Country.find_by!(iso: 'AU')
+            abbr: state,
+            country: Spree::Country.find_by!(iso: 'AU')
           )
       )
     end

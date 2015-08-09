@@ -22,6 +22,9 @@ module Theartscene
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
+      # Override searcher_class set by spree-multi-domain extension
+      Spree::Config.searcher_class = Spree::Search::Elasticsearch
+
       # TODO configure elasticsearch index
       unless Elasticsearch::Model.client.indices.exists \
         index: Spree::ElasticsearchSettings.index
@@ -39,6 +42,7 @@ module Theartscene
                     filter: ['lowercase', 'asciifolding', 'nGram_filter'],
                     tokenizer: 'whitespace'
                   },
+
                   whitespace_analyzer: {
                     type: 'custom',
                     filter: ['lowercase', 'asciifolding'],
