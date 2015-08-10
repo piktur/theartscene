@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Theartscene
   class Application < Rails::Application
 
-    config.assets.precompile += %w( *.jpg )
+    config.assets.precompile += %w( *.jpg spree/backend/jquery.dynatable.css spree/backend/jquery.dynatable.js )
 
     config.to_prepare do
       # Load application's model / class decorators

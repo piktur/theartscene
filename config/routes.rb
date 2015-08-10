@@ -12,6 +12,12 @@ Spree::Core::Engine.routes.append do
   #get '/about', :to => 'about#index', :as => :about
 
   namespace :admin do
+    resources :xero_session do
+      collection do
+        get :contacts
+      end
+    end
+
     resources :reports, only: [:index] do
       collection do
         get :new_users_by_date

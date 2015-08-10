@@ -5,8 +5,15 @@ html.no-js lang="#{I18n.locale}"
   head data-hook='admin_inside_head'
     = render partial: 'spree/admin/shared/head'
     = javascript_include_tag '//www.google.com/jsapi', 'chartkick'
+    = stylesheet_link_tag 'spree/backend/jquery.dynatable'
+    = javascript_include_tag 'spree/backend/jquery.dynatable'
     / OR
     / = javascript_include_tag 'path/to/highcharts.js', 'chartkick'
+    / TODO add forms
+    /link [
+        href='http://fonts.googleapis.com/css?family=Lato:400,700'
+        rel='stylesheet'
+        type='text/css']
 
   body.admin
     / Loading progress bars

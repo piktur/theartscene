@@ -1,0 +1,49 @@
+/- content_for :page_title {"Xero: Example Data Feed"}
+/ul
+  == spree.contacts_admin_xero_sessions_path
+scss:
+  #contacts a {
+    color: black !important;
+  }
+
+
+table#contacts.table.table-bordered
+  thead
+    th contact_id\
+    th contact_status\
+    th name\
+    th addresses\
+    th address_type\
+    th phones\
+    th phone_type\
+    th updated_date_utc\
+    th is_supplier\
+    th is_customer\
+  tbody
+
+
+pre#json
+  /== @data
+
+  /== format.json { render json: @data }
+  /var $records = $('#json'),
+            myRecords = JSON.parse($records.text());
+          $('#contacts').dynatable({
+            dataset: {
+              records: myRecords
+            }
+          });
+
+script
+  |
+
+    $.ajax({
+      url: '/admin/xero_session/contacts.json',
+      success: function(data){
+        $('#contacts').dynatable({
+          dataset: {
+            records: data
+          }
+        });
+      }
+    });

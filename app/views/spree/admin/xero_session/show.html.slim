@@ -1,0 +1,23 @@
+/- content_for :page_title {"Xero: Example Data Feed"}
+
+/ul
+  == spree.contacts_admin_xero_sessions_path
+table.table.table-bordered
+
+script
+  |
+    $(document).ready(function () {
+
+      function tablize_json(json) {
+        var tr;
+        for (var i = 0; i < json.length; i++) {
+          tr = $('<tr/>');
+          tr.append("<td>" + json[i].User_Name + "</td>");
+          tr.append("<td>" + json[i].score + "</td>");
+          tr.append("<td>" + json[i].team + "</td>");
+          $('table').append(tr);
+        }
+      }
+
+      tablize_json(#{@data})
+    });

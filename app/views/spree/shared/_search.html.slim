@@ -1,0 +1,92 @@
+- @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots
+- @taxonomies = @taxononomies.present? ? @taxononomies : Spree::Taxonomy.all
+
+= form_tag spree.products_path,
+           method: :get,
+           role: 'search',
+           id: 'search',
+           class: 'navbar-form' do
+
+  .form-group#bloodhound
+    .input-group
+      span.input-group-addon.dropdown
+        - cache(cache_key_for_taxons) do
+          /= select_tag :taxononmy,
+            options_for_select(),
+            'aria-label' => 'Taxon',
+            class: 'form-control'
+
+          a.dropdown-toggle data-toggle='dropdown' role='button'
+            |Dept.&#32;
+            span.icon.i-chevron-down.inline
+
+          ul.dropdown-menu
+            /== [[Spree.t(:all_departments), '']] + @taxonomies.map {|t| [t.name, t.id]}, @taxonomy ? @taxonomy.id : params[:taxon]
+
+
+      /= search_field_tag :keywords,
+                           params[:keywords],
+                           :placeholder => Spree.t(:search),
+                           class: "form-control",
+                           id: "search"
+
+      input#search.form-control.input-lg.typeahead [
+        name='q'
+        type='text'
+        placeholder="#{Spree.t(:search)}"]
+
+      /span.input-group-btn
+        input.btn.btn-success.btn-lg type="submit"
+          span.icon.inline.i-search
+          /== Spree.t(:search)
+
+  javascript:
+    // ===== String matching
+    var substringMatcher = function(strs) {
+      return function findMatches(q, cb) {
+        var matches, substringRegex;
+
+        // an array that will be populated with substring matches
+        matches = [];
+
+        // regex used to determine if a string contains the substring `q`
+        substrRegex = new RegExp(q, 'i');
+
+        // iterate through the pool of strings and for any string that
+        // contains the substring `q`, add it to the `matches` array
+        $.each(strs, function(i, str) {
+          if (substrRegex.test(str)) {
+            matches.push(str);
+          }
+        });
+
+        cb(matches);
+      };
+    };
+
+    var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+      'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+      'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+      'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+      'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+      'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+      'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+      'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+      'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+    ];
+
+    $('#search .typeahead .strings').typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1
+    },
+    {
+      name: 'states',
+      source: substringMatcher(states)
+    });
+
+    // ===== with bloodhound
+    $('#blou .typeahead .prefetch').typeahead(null, {
+      name: 'countries',
+      source: countries
+    });

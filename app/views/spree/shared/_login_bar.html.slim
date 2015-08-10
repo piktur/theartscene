@@ -1,0 +1,9 @@
+- if spree_current_user 
+  li
+    = link_to Spree.t(:my_account), spree.account_path
+  li
+    = link_to Spree.t(:logout), spree.logout_path
+- else
+  li#link-to-login
+    = link_to Spree.t(:login), spree.login_path
+

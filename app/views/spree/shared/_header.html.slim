@@ -1,12 +1,60 @@
-#spree-header
-  #header data-hook=""
-    .container
-      .row
-        figure#logo.col-md-4 data-hook=""
-          = logo
+= render partial: 'spree/shared/main_nav_bar' if store_menu?
 
-        = render partial: 'spree/shared/nav_bar'
+header#spree-header.container-fluid.jumbotron.text-center
+  h1
+    / figure#logo.col-md-4 data-hook=""
+      == logo
+    == render partial: 'spree/shared/logo'
 
-  .container
-    = render partial: 'spree/shared/main_nav_bar' if store_menu?
-   
+  .small
+    |Since 1980
+
+  #header-text.lead
+    |Australia's leading retailer of quality Artists' Materials & Custom Framing
+
+  br
+
+  = render partial: 'spree/shared/nav_bar'
+
+  /a#action-shop.text-uppercase href="#about"
+    strong Get Creative, Shop Now
+
+.container-fluid#promo
+
+  table#upper-promos.col-lg-8.col-lg-offset-2 border="0" cellpadding="10" cellspacing="0" align="center"
+    tr
+      td.col-lg-1 align="right"
+        span#promo-icon.icon.i-freight.inline
+      td.col-lg-4
+        h2
+          |&#32;
+          strong Free Shipping
+          |&#32;over&#32;
+          strong $165
+          |&#32;
+      td.col-lg-1 align="right"
+        span#promo-icon.icon.i-like.inline
+      td.col-lg-4
+        h2
+          strong Like our new site & SAVE
+
+    tr
+      td
+      /.text-muted
+      td.lead.col-lg-4
+        /|&#32;for orders over $165&#32;
+        a [
+          data-target="#shipping-policy"
+          data-toggle="modal"]
+          |conditions apply
+      td
+      /.text-muted
+      td.lead.col-lg-4
+        a [
+          data-target="#rewards-policy"
+          data-toggle="modal"]
+          |conditions apply
+
+    tr
+      td
+        br

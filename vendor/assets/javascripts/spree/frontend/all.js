@@ -27,11 +27,12 @@
 
 //= require_tree .
 
+//= require spree/frontend/typeahead.jquery
+//= require spree/frontend/bloodhound
 //= require spree/frontend/spree_multi_currency
 //= require spree/frontend/spree_price_books
 //= require spree/frontend/spree_i18n
 //= require spree/elasticsearch
-//= require spree/frontend/typehead
 //= require spree/frontend/spree_braintree_cse
 
 //= require turbolinks

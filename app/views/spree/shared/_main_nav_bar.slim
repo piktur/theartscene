@@ -1,0 +1,131 @@
+nav#primary-nav.navbar.navbar-default.navbar-fixed-top role="navigation"
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle data-target="#custom-collapse" data-toggle="collapse" type="button"
+        / Apply bootstrap class .sr-only for screen reader flags hidden to standard browsers
+        span.sr-only
+          |Show Navigation
+
+        span.icon.i-menu
+
+      // TODO confirm Spree default id #home-link
+      // link_to ,
+      a#brand.navbar-brand [
+        href="#{spree.root_path}"
+        role='banner'
+        title="#{current_store.name || Spree.t(:home)}"]
+
+        img [
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 116 15.4'><text x='317' y='540' line-height='125%' transform='translate(-317 -525)' style='letter-spacing:0;word-spacing:0;font-size:20;font-family:Droid Sans'><tspan x='317' y='540'>the art scene</tspan></text></svg>"
+          alt="#{current_store.name}"]
+
+    #custom-collapse.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        /li
+          a href="#totop"
+            |Home
+
+        /li
+          a href="#totop"
+            |Shop
+
+        li.dropdown
+          a.dropdown-toggle [
+            aria-expanded="false"
+            data-toggle="dropdown"
+            href="/the-mitchell-school-of-art/"]
+
+            |The Mitchell School of Art
+
+          ul.dropdown-menu role="menu"
+            li
+              a#register.text-center href="#register"
+                |Book Now
+
+            li
+              a href="#tutors"
+                |Tutors
+
+            li
+              a href="#workshops"
+                |Workshops
+
+            li
+              a href="#accommodation"
+                |Accommodation
+
+            li
+              a href="#about"
+                |About
+
+            li
+              a href="#location"
+                |Location
+
+        li
+          a href="#news"
+            |News
+
+        li
+          a href="#contact"
+            |Contact
+
+      /== render partial: 'spree/shared/search'
+
+      ul.navbar-nav.navbar-right.col-lg-4
+        /li#contact
+          /.col-lg-8
+          span.action
+            /== partial "#{config[:partials_dir]}/contact/call"
+            a#call itemprop='telephone' href="tel:+#{phone}"
+              span.icon.i-call.inline
+              span.label.inline
+                == phone
+
+          /span.action
+            a#email itemprop='email' href='mailto:#{email}'
+              span.icon.i-mail-unread.inline
+              span.label.inline
+                == email
+
+        ul#session.pull-right
+          /.col-lg-4
+          li#link-to-cart.toggle-cart.action.inline
+            /.col-lg-4 data-hook=''
+            noscript
+              == link_to Spree.t(:cart), '/cart'
+            span.icon.i-cart
+            script
+              |Spree.fetch_cart()
+
+            span.label
+              |Cart
+
+          li.toggle-auth.action.inline
+            - if spree_current_user
+              a href="#{spree.account_path}"
+                span.icon.i-user
+                span.label
+                  == Spree.t(:my_account)
+
+              a href="#{spree.logout_path}"
+                span.icon.i-login
+                span.label
+                  == Spree.t(:logout)
+
+            - else
+              a href="#{spree.login_path}"
+                span.icon.i-user
+                span.label
+                  == Spree.t(:login)
+
+          li.toggle-auth.action.inline
+            /.col-lg-4
+            /== partial "#{config[:partials_dir]}/components/language_select"
+            span.icon.i-flag
+            span.label
+              |#{::I18n.locale}
+
+
+
+

@@ -1,0 +1,63 @@
+// Colour Filters
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  // TODO removed support for opacity in obsolete browsers
+  // -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity * 100})";
+  // filter: #{alpha(opacity=$opacity * 100)};
+}
+
+@mixin greyscale {
+  -moz-filter: grayscale(1);
+  -webkit-filter: grayscale(1); // Chrome 19+ & Safari 6
+  -o-filter: grayscale(1);
+  -ms-filter: grayscale(1);
+  filter: grayscale(1);  // IE6-9
+  //  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='ashen'><feComponentTransfer><feFuncR type='linear' slope='0.4'/><feFuncG type='linear' slope='0.4'/><feFuncB type='linear' slope='0.4'/></feComponentTransfer><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0  0  0  1 0'/><feGaussianBlur stdDeviation='0' /></filter></svg>#ashen");
+}
+
+@mixin greyscale-override {
+  -moz-filter: grayscale(0);
+  -webkit-filter: grayscale(0);
+  -o-filter: grayscale(0);
+  -ms-filter: grayscale(0);
+  filter: grayscale(0);
+}
+
+@mixin hue-rotate($deg) {
+  -webkit-filter: brightness(2.5) saturate(8) hue-rotate(#{$deg}deg);
+  filter:         brightness(2.5) saturate(8) hue-rotate(#{$deg}deg);
+}
+
+@mixin invert($num) {
+  -webkit-filter: invert($num);
+  filter:         invert($num);
+}
+
+%bg-primary {
+  background-color: $root;
+}
+
+%bg-primary-dark {
+  background-color: darken($root, 20%);
+}
+
+
+%bg-secondary {
+  background-color: $complimentary;
+}
+
+%bg-secondary-dark {
+  background-color: darken($complimentary, 20%);
+}
+
+%bg-secondary-darker {
+  background-color: darken($complimentary, 24%);
+}
+
+%bg-tertiary {
+  background-color: $complimentary;
+}
+
+%bg-tertiary-dark {
+  background-color: darken($complimentary, 20%);
+}

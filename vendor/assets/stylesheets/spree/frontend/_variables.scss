@@ -38,6 +38,7 @@ $brand-danger:          darken($root, 10%) !default;
 $body-bg:               #fff !default;
 //** Global text color on `<body>`.
 $text-color:            $gray-dark !default;
+$text-color-invert:     invert($gray-base) !default;
 
 //** Global textual link color.
 $link-color:            $brand-primary !default;

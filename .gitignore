@@ -22,6 +22,7 @@
 *.csv*
 
 # Ignore Xero keys
-privatekey.pem
-publickey.cer
-public_privatekey.pfx
+/xero
+#privatekey.pem
+#publickey.cer
+#public_privatekey.pfx

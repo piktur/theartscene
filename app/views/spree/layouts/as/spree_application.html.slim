@@ -30,7 +30,7 @@ html.no-js lang="#{I18n.locale}"
         == render partial: 'spree/shared/sidebar' if content_for? :sidebar
 
         #content [
-          class="#{!content_for?(:sidebar) ? 'col-sm-12' : 'col-sm-8 col-md-9'}"
+          class="#{!content_for?(:sidebar) ? 'col-sm-8 col-sm-offset-2' : 'col-sm-8 '}"
           data-hook='']
 
           == flash_messages

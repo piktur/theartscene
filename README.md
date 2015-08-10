@@ -698,6 +698,32 @@ or Node.js [csvtojson](https://github.com/Keyang/node-csvtojson)
 
 > Issue: We risk invalid data uploads without datashift_spree's inbuilt data validation.
 
+https://guides.spreecommerce.com/developer/migration.html
+
+http://stackoverflow.com/questions/1325865/what-is-the-standard-way-to-dump-db-to-yml-fixtures-in-rails
+```ruby 
+namespace :db do
+  namespace :fixtures do    
+    desc 'Create YAML test fixtures from data in an existing database.  
+    Defaults to development database.  Specify RAILS_ENV=production on command line to override.'
+    task :dump => :environment do
+      sql  = "SELECT * FROM %s"
+      skip_tables = ["schema_migrations"]
+      ActiveRecord::Base.establish_connection(Rails.env)
+      (ActiveRecord::Base.connection.tables - skip_tables).each do |table_name|
+        i = "000"
+        File.open("#{Rails.root}/test/fixtures/#{table_name}.yml.new", 'w') do |file|
+          data = ActiveRecord::Base.connection.select_all(sql % table_name)
+          file.write data.inject({}) { |hash, record|
+            hash["#{table_name}_#{i.succ!}"] = record
+            hash
+          }.to_yaml
+        end
+      end
+    end
+  end
+end
+```
 ##### Alternatives to Datashift
 Write CLI to communicate with Spree's [**REST API**](https://guides.spreecommerce.com/api/)
 

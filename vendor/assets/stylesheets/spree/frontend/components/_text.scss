@@ -1,3 +1,94 @@
+// From middleman demo
+%action-font {
+  font-size: $font-size-base * 1;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: $font-size-base * .1;
+}
+
 h1 {
   margin-bottom: 30px;
 }
+
+// From middleman demo
+//html, body, div, main, span, applet, object, iframe,
+//h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+//a, abbr, acronym, address, big, cite, code,
+//del, dfn, em, img, ins, kbd, q, s, samp,
+//small, strike, strong, sub, sup, tt, var,
+//b, u, i, center,
+//dl, dt, dd, ol, ul, li,
+//fieldset, form, label, legend,
+//table, caption, tbody, tfoot, thead, tr, th, td,
+//article, aside, canvas, details, embed,
+//figure, figcaption, footer, header, hgroup,
+//menu, nav, output, ruby, section, summary,
+//time, mark, audio, video {
+//  font: 400 2rem $font-family-sans-serif;
+//}
+//
+//html {
+//  // % scales with browser zoom
+//  // typical default browser font size = 16p
+//  // 62.5% of 16px = 10px
+//  font: 400 1rem $font-family-sans-serif;
+//  //font-size: 62.5%;
+//  color: $black;
+//  -webkit-font-smoothing: antialiased;
+//}
+//
+//
+//
+//.btn {
+//  text-transform: uppercase;
+//  letter-spacing: 2px;
+//  //font-size: 2rem;
+//}
+//
+//.panel-heading:after {
+//  line-height: 1;
+//  //font-size: 3rem;
+//}
+//
+//
+//.font-alt {
+//  text-transform: uppercase;
+//}
+//
+//.large-text {
+//  //font-size: 3rem !important;
+//}
+//
+//
+//.hs-title-size-1 {
+//  //font-size: 2rem !important;
+//}
+//
+//.hs-title-size-2 {
+//  line-height: 1.3;
+//  letter-spacing: 1px;
+//  //font-size: 3rem;
+//  opacity: .8;
+//}
+//
+//.hs-title-size-3 {
+//  letter-spacing: 16px;
+//  //font-size: 4rem;
+//}
+//
+//.hs-title-size-4 {
+//  letter-spacing: 24px;
+//  font-weight: 400;
+//  //font-size: 4rem;
+//}
+//
+//.rotate {
+//  //Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+//  text-shadow: none !important;
+//}
+//
+//.navbar-custom {
+//  text-transform: uppercase;
+//  letter-spacing: 3px;
+//  font-size: 2rem;
+//}

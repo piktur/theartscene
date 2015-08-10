@@ -10,6 +10,7 @@
 
 @import "variables";
 @import 'bootstrap/mixins';
+@import "mixins/*";
 
 // Reset and dependencies
 @import 'bootstrap/normalize';
@@ -68,14 +69,16 @@
 //@import 'vendor/scss/animate';
 //@import 'vendor/scss/base';
 
+//@import "spree/frontend/components/*";
 @import "spree/frontend/components/text";
 @import "spree/frontend/components/icons";
+@import "spree/frontend/components/buttons";
 @import "spree/frontend/components/images";
 @import "spree/frontend/components/menu";
-@import "spree/frontend/components/header";
 @import "spree/frontend/components/footer";
 @import "spree/frontend/components/alerts";
 @import "spree/frontend/components/tables";
+@import "spree/frontend/trial";
 
 // Per-page Styles
 // Styles particular to the landing page etc.

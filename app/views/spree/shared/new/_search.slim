@@ -1,0 +1,31 @@
+form#search.navbar-form.col-sm-12 role="search"
+  .form-group
+    .input-group
+      span.input-group-addon.dropdown
+        a.dropdown-toggle data-toggle='dropdown' role='button'
+          |Dept.&#32;
+          span.icon.i-chevron-down.inline
+
+        ul.dropdown-menu
+          // Sorted by popularity
+          li
+            a Painting
+          li
+            a Drawing
+          li
+            a Sculpture
+          li
+            a Framing
+          li
+            a Books
+          li
+            a Video
+          li
+            a Printmaking
+
+
+      input.form-control.input-lg placeholder="For..." type="text"
+
+      span.input-group-btn
+        button.btn.btn-default.btn-lg type="submit"
+          span.icon.i-search

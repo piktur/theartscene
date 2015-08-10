@@ -56,7 +56,7 @@ Spree.config do |config|
   config.expedited_exchanges_days_window = 7
   config.last_check_for_spree_alerts  = nil
   config.layout                       = "spree/layouts/#{Spree::Store.current.code}/spree_application"
-  config.logo                         = 'spree/logo/logo_lo.svg'
+  config.logo                         = "spree/logo/#{Spree::Store.current.code}/logo_lo.svg"
   config.max_level_in_taxons_menu     = 3
   config.orders_per_page              = 15
   config.properties_per_page          = 15

@@ -1,32 +1,205 @@
-// -- Spree Custom Header and Footer ---------------------
-#spree-header {
-  background: $brand-primary asset-url('spree_header.jpg') center center;
-  background-size: cover;
-  margin-bottom: $line-height-computed;
 
-  #header {
-    background: rgba($gray-darker, 0.4);
-    padding: $line-height-computed 0;
-  }
 
-  #logo {
-    margin-bottom: 10px;
+#logo {
+  margin-bottom: 10px;
 
-    img {
-      width: 306px;
-    }
-  }
-
-  .nav a {
-    color: white;
-
-    &:hover, &:focus {
-      background: rgba($gray-darker, 0.4);
-    }
-  }
-
-  .navbar {
-    border: 0;
-    margin-bottom: 0;
+  img {
+    width: 10vw;
   }
 }
+
+// From middleman demo
+#primary-nav {
+  height: auto;
+
+  .navbar-brand {
+    width: 200px;
+    img {
+
+    }
+  }
+
+  .navbar-nav {
+    > li {
+      padding: 0;
+
+      > a {
+        @extend %action-font;
+
+        display: block;
+        margin: auto;
+        padding: 20px;
+
+        border-bottom: 10px solid rgba(255,255,255,0);
+
+        &:hover,
+        &:active,
+        .active {
+          border-color: $brand-primary;
+        }
+      }
+    }
+  }
+
+  .navbar-form {
+    display:inline-block;
+  }
+
+  .navbar-right {
+    > li {
+      border-right: 1px solid $gray-lighter;
+      > a {
+        @extend %action-font;
+      }
+    }
+
+    .action {
+      text-transform: uppercase;
+
+      a {
+        display: inline-block;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .dropdown-menu {
+    a {
+      @extend %action-font;
+      padding: $padding-base-vertical * 2;
+    }
+  }
+}
+
+#contact,
+#session {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 0;
+
+  > .action {
+    display: inline-block;
+  }
+}
+#session {
+  padding: $padding-base-vertical;
+}
+#contact {
+  > .action {
+    display: block;
+  }
+}
+
+
+// Emphasise Mitchell School of Art Registration link
+#register {
+  @extend %action-font;
+  padding: 20px;
+
+  color: $text-color-invert;
+  background-color: $brand-primary;
+  border-bottom: 1px solid $gray-lighter;
+
+  &:hover {
+
+  }
+}
+
+.dropdown-menu {
+  // Ensure dropdown width is at least as wide as its parent
+  min-width: 100%;
+
+  // Apply alternate colouration to each odd list item
+  li:nth-child(odd) {
+    background: rgba($brand-primary, .05);
+  }
+}
+
+
+// -- Spree Custom Header and Footer ---------------------
+#spree-header {
+  //margin-top: 50px;
+  //background: $brand-primary asset-url('spree/frontend/spree_header_alt.jpg') no-repeat center center;
+  //background-size: cover;
+  margin-bottom: $line-height-computed;
+
+  //  #header {
+  //    background: rgba($gray-darker, 0.4);
+  //    padding: $line-height-computed 0;
+  //  }
+  //
+  //
+
+  //  .nav a {
+  //    color: $text-color;
+  //
+  //    &:hover,
+  //    &:focus {
+  //      background: rgba($gray-lighter, 0.4);
+  //    }
+  //  }
+  //
+  //  .navbar {
+  //    border: 0;
+  //    margin-bottom: 0;
+  //  }
+}
+$overlay: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+
+.jumbotron {
+  background: $overlay, image_url('spree/frontend/spree_header_alt.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  font-size: $font-size-base * 2.5;
+
+  h1 {
+    margin: 3vh auto;
+
+    #logo img {
+      height: 18vh;
+    }
+  }
+
+  .small {
+    @extend %action-font;
+    color: $text-color-invert;
+  }
+
+  #header-text {
+    font-family: $font-family-serif;
+    font-size: $font-size-base * 2;
+    color: $text-color;
+    max-width: 40vw;
+    margin: auto;
+  }
+
+  #action-shop {
+    @extend %action-font;
+
+    display: block;
+    margin: 0 auto;
+    padding: $padding-large-vertical * 2;
+    min-width: 40vw;
+    max-width: 200px;
+
+    background-color: rgba($text-color, .5);
+    border: 1rem solid $root;
+
+    color: $root;
+
+    &:hover {
+      text-decoration: none;
+      border-color: desaturate($root, 20%);
+    }
+  }
+}
+
+
+#promo {
+  //background-color: $brand-success;
+  margin: 25px auto;
+}
+

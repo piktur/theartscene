@@ -1,0 +1,45 @@
+// Individual action buttons
+.action {
+  display: inline-block;
+  cursor: pointer;
+
+  > .icon {
+    display: block;
+    margin: 0 auto;
+  }
+
+  button,
+  .button {
+    padding: 0;
+    border: 0;
+  }
+
+  .label {
+    display: block;
+    color: $text-color;
+    width: 100%;
+    margin: 0 auto;
+    text-transform: uppercase !important;
+  }
+}
+
+.navbar {
+  #call,
+  #email {
+    display: block;
+
+    .label {
+      display: inline-block;
+      width: auto;
+
+      font-size: $font-size-base * 1;
+    }
+  }
+}
+
+#checkout-continue-shopping,
+#checkout-proceed {
+  .icon:before {
+    -webkit-filter: brightness(3);
+  }
+}

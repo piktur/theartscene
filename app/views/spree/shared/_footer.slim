@@ -1,19 +1,37 @@
 footer
   #info.container-fluid
     .col-md-10.col-md-offset-1
-      .col-lg-4.col-md-6 itemscope='' itemtype='https://schema.org/Organisation'
+      .col-lg-5.col-md-6 [
+        itemscope=''
+        itemtype='https://schema.org/Organisation']
+
         .lead Contact
 
         .row
-          .col-xs-6
+          .col-xs-2
+
+            a.btn-share
+              span.icon.i-facebook
+              span.label facebook
+
+
+            a.btn-share
+              span.icon.i-google
+              span.label google
+
+
+            a.btn-share
+              span.icon.i-twitter
+              span.label twitter
+
+
+          .col-xs-5
             p
               /== partial "#{config[:partials_dir]}/contact/call"
 
-              br
-
-              a#email itemprop='email' href='mailto:sales@artscene.com.au'
+              a#email itemprop='email' href="mailto:#{email}"
                 span.icon.i-mail-unread.inline
-                span.label.inline sales@artscene.com.au
+                span.label.inline == email
 
               /== address(@user_config['address'], {inline: false, type: 'postal'})
 
@@ -58,11 +76,11 @@ footer
                   td &#32;-&#32;
                   td 5:30PM
 
-          .col-xs-6
+          .col-xs-5
             p
               a#call itemprop='telephone' href="tel:+61 02 8815 1569"
                 span.icon.i-call.inline
-                span.label.inline 02 8815 1569
+                span.label.inline == phone
 
               br
 
@@ -70,7 +88,6 @@ footer
                 span.icon.i-call.inline
                 span.label.inline 02 8815 1569
                 /== phone
-
 
               br
 
@@ -122,30 +139,6 @@ footer
                   td 9:00AM
                   td &#32;-&#32;
                   td 5:30PM
-        .row
-          .col-xs-12
-            .col-xs-4
-              hr.divider
-            .col-xs-4.lead.text-center
-              |Join us on
-            .col-xs-4
-              hr.divider
-        .row
-          .share.inline.col-xs-10.col-xs-offset-1
-            .col-xs-4
-              a.btn-share
-                span.icon.i-facebook
-                span.label facebook
-
-            .col-xs-4
-              a.btn-share
-                span.icon.i-google
-                span.label google
-
-            .col-xs-4
-              a.btn-share
-                span.icon.i-twitter
-                span.label twitter
 
       .col-lg-4.col-md-6
         .lead Feedback
@@ -165,7 +158,7 @@ footer
           br
           |-- Maria
 
-      .col-lg-4.col-md-6
+      .col-lg-3.col-md-6
         .lead Latest News
 
         table.col-md-12
@@ -194,48 +187,49 @@ footer
               a href="#" Getting started with Watercolour
             td.text-right 2Jun
 
-  #map.container-fluid
+  /#map.container-fluid
+br
 
-  #security.container-fluid
-    .col-md-8.col-md-offset-2
-      table border="0" cellpadding="10" cellspacing="0" align="center"
-        tr
-          td align="center"
-          td align="center"
-            a#logo-braintree [
-              href="https://www.braintreegateway.com/merchants/YOUR_MERCHANT_ID/verified"
-              target="_blank"]
+#security.container-fluid
+  .col-md-8.col-md-offset-2
+    table border="0" cellpadding="10" cellspacing="0" align="center"
+      tr
+        td align="center"
+        td align="center"
+          a#logo-braintree [
+            href="https://www.braintreegateway.com/merchants/YOUR_MERCHANT_ID/verified"
+            target="_blank"]
 
-              img [
-                src="https://s3.amazonaws.com/braintree-badges/braintree-badge-wide-light.png"
-                width="280px"
-                height="44px"
-                border="0"]
+            img [
+              src="https://s3.amazonaws.com/braintree-badges/braintree-badge-wide-light.png"
+              width="280px"
+              height="44px"
+              border="0"]
 
-            a#logo-paypal href="https://www.paypal.com/au/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/au/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"
-              img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png" alt="Buy now with PayPal"
+          a#logo-paypal href="https://www.paypal.com/au/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/au/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"
+            img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png" alt="Buy now with PayPal"
 
-      br
+    br
 
-      .lead.text-center.text-muted
-        |Want to know more about our&#32;
+    .lead.text-center.text-muted
+      |Want to know more about our&#32;
 
-        a [
-          data-target="#shipping-policy"
-          data-toggle="modal"]
+      a [
+        data-target="#shipping-policy"
+        data-toggle="modal"]
 
-          strong Shipping
+        strong Shipping
 
-        |&#32;&amp;&#32;
+      |&#32;&amp;&#32;
 
-        a [
-          data-target="#privacy-policy"
-          data-toggle="modal"]
+      a [
+        data-target="#privacy-policy"
+        data-toggle="modal"]
 
-          strong Privacy
+        strong Privacy
 
-        |&#32;policies?
+      |&#32;policies?
 
-  hr.divider
+hr.divider
 
-  == render partial: "spree/shared/footnote"
+== render partial: "spree/shared/footnote"
