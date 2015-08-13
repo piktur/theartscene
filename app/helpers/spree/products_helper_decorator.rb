@@ -6,11 +6,7 @@ module Spree
       # See spree-multi-domain-3734b6b678ba/app/helpers/spree/products_helper_decorator.rb
       def get_taxonomies
         @taxonomies ||=
-          if current_store.present?
-            Spree::Store.find_by!(id: current_store.id).taxonomies
-          else
-            Spree::Taxonomy.all
-          end
+            current_store.present? ? current_store.taxonomies : Spree::Taxonomy.all
         @taxonomies = @taxonomies.includes(:root => :children)
         @taxonomies
       end

@@ -7,7 +7,7 @@ module Spree
       return unless @taxon
 
       @searcher = build_searcher(params.merge(:taxon => @taxon.id))
-      @products = Spree::Product.search(params[:q]).records # @searcher.retrieve_products
+      @products = @searcher.retrieve_products
       @taxonomies = get_taxonomies
     end
     # End Source Override [1]

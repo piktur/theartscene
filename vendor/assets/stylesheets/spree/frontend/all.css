@@ -13,7 +13,7 @@ Regarding excessive frontend dependencies set by the elassticesarch extension;
 ...to get people started on a vanilla store. When you don't need it, remove the line
 require spree/elasticsearch ... and include only the necessary from elasticsearch.css
 https://github.com/javereec/spree_elasticsearch/issues/9#issuecomment-64076473
- *= require spree/elasticsearch
+ * require spree/elasticsearch
 
  * require spree/frontend/spree_braintree_cse
 */

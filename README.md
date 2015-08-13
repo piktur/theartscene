@@ -228,6 +228,17 @@ Note: documentation has not been updated to match new user interface
 - Write cutom reports
 
 ### Report Focus
+
+#### Conversion metrics
+Traffic Sources
+New/Unique Visitor Conversion
+Return Visitor Conversion
+Interactions Per Visit
+Value Per Visit
+Cost Per Conversion
+Bounce Rate
+Exit Pages
+
 - Analytics
 - Sales by time period
 - Profit/Loss: Profit/Loss report ie. = gross - (cost_price + postage + promotions)
@@ -406,6 +417,8 @@ At present, the dataset is maintained and stored in a Spreadsheet and made porta
 > Queue [**Datashift**](https://github.com/autotelik/datashift). Datashift provides **import/export** facilities to shift data between [ActiveRecord](http://guides.rubyonrails.org/active_record_querying.html) databases/applications and Spreadsheets/CSV
   OR https://github.com/mespina/spree_importer
   OR https://github.com/jumph4x/spree-batch-products/tree/3-0-stable
+  
+http://blog.tworedkites.com/2014/04/spree-and-using-integration-specs-to.html
 
 ##### Using Datashift
 Ensure *.thor file exists in root directory.
@@ -857,6 +870,33 @@ https://github.com/javereec/spree_elasticsearch
 Configuration example provided here 
 http://stackoverflow.com/questions/30079572/filtering-spree-products-by-size-using-elastic-search
 
+#### Latest products
+http://joshuapaling.com/blog/2013/09/10/how-to-show-latest-products-in-spree.html
+
+
+##### Searchkick - a simple wrapper for Elasticsearch
+8/8/15 have decided to go with searchkick, so much easier to use than elasticsearch-rails
+Prepopulate Elasticsearch server with English synonyms 
+https://github.com/ankane/searchjoy
+```
+cd /Documents/webdev/future_projects/theartscene/spree/elasticsearch-1.7.1
+
+# boot elasticsearch server
+$ bin/elasticsearch
+
+
+data = File.open('db/default/data/_search_data.csv')
+tmp = []
+SmarterCSV.process(data).uniq! {|term| term[:term] }.each.with_index(1) {|item, index| tmp << {t: item[:term], i: index}}
+File.open('vendor/assets/javascripts/spree/frontend/autocomplete.json', 'w+') {|f| f.write tmp.to_json}
+# File.open('app/views/spree/shared/autocomplete.json', 'w+') {|f| f.write tmp.to_json}
+
+# Prepoulate with wordnet synonyms
+cd /tmp
+curl -o wordnet.tar.gz http://wordnetcode.princeton.edu/3.0/WNprolog-3.0.tar.gz
+tar -zxvf wordnet.tar.gz
+mv prolog/wn_s.pl /var/lib
+```
 > ##### Ruby API 
 > https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/_the_ruby_client.html
 
@@ -1201,6 +1241,8 @@ To test
     
     bundle exec rails g spree_price_books:install
     bundle exec rake price_books:currency_rates
+    
+    bundle exec rails g spree_volume_pricing:install
     
     bundle exec rails g spree_chimpy:install
     
@@ -1874,3 +1916,9 @@ Modified
 > lib/spree_multi_domain/multi_domain_helpers.rb
 > app/models/spree/store_taxonomy.rb
 > db/migrate/20150808040401_create_join_table_spree_store_taxonomies.rb
+
+#### Debugging
+Where's the call coming from
+Record source of ActiveRecord query when SQL =~ /SELECT "spree_products"/
+> config/initializers/sql_stacktrace.rb:14
+

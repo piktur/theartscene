@@ -14,7 +14,8 @@ factories = File.join(Rails.root, 'db', 'default', 'spree')
 # == Generate CSV from master.xlsx worksheets
 # Roo will convert the spreadsheet to Ruby Objects
 # We then generate csv files from each worksheet
-xlsx = Roo::Excelx.new(File.join(data, '_master040815.xlsx'))
+# TODO _master040815 has all data
+xlsx = Roo::Excelx.new(File.join(data, '_master080815.xlsx'))
 
 # Convert each sheet to CSV and output to a single file per object
 xlsx.sheets.each do |sheet|

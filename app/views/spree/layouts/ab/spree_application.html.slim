@@ -13,9 +13,13 @@ html.no-js lang="#{I18n.locale}"
 
     /== render partial: 'spree/shared/google_analytics.js'
 
-    == render partial: 'spree/shared/header'
+    = render partial: 'spree/shared/main_nav_bar' if store_menu?
 
-    .container-fluid
+    - if current_page?(controller: 'home')
+      == render partial: 'spree/shared/header'
+
+
+    .container-fluid#main style="margin-top: 100px;"
       .row data-hook=''
 
         == breadcrumbs(@taxon)

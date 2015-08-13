@@ -99,9 +99,13 @@ gem 'spree',
   # https://github.com/javereec/spree_elasticsearch
   # bundle
   # bundle exec rails g spree_elasticsearch:install
-  gem 'spree_elasticsearch',
-      github: 'javereec/spree_elasticsearch',
-      branch: '3-0-stable'
+  # gem 'spree_elasticsearch',
+  #     github: 'javereec/spree_elasticsearch',
+  #     branch: '3-0-stable'
+
+  gem 'searchkick',
+      github: 'ankane/searchkick',
+      branch: 'master'
 
   # https://github.com/jbrien/spree_sunspot_search
   # http://jacopretorius.net/2013/10/integrating-solr-search-with-spree.html
@@ -219,6 +223,10 @@ gem 'spree',
   gem 'spree_i18n',
       github: 'noname00000123/spree_i18n',
       branch: '3-0-stable'
+
+  # gem 'cardboard_cms'
+
+  gem 'storytime'
 
   # gem 'comfortable_mexican_sofa', '~> 1.12.0'
 

@@ -4,36 +4,30 @@ module Spree
       before_filter :get_xero_client
 
       def contacts
-        render json:  @client.Contact.all.to_json
+        render json: @client.Contact.all.to_json
       end
 
-      def new
-        # request_token = @client.request_token(:oauth_callback => 'https://api.xero.com/api.xro/2.0/xero_session/create')
-        # session[:request_token] = request_token.token
-        # session[:request_secret] = request_token.secret
+      def create_contact
+        @client = Xeroizer::PrivateApplication.new(
+            ENV['DEMO_XERO_CONSUMER_KEY'],
+            ENV['DEMO_XERO_CONSUMER_SECRET'],
+            "#{Rails.root}/xero/demo/privatekey.pem"
+        )
 
-        #redirect_to request_token.authorize_url
-
-        # render json: @client.Contact.all
+        contact = @client.Contact.build(name: "Test #{Faker::Name.last_name}")
+        contact.add_address(
+            type: 'STREET',
+            line1: Faker::Address.street_address,
+            city: Faker::Address.city
+        )
+        contact.add_phone(type: 'DEFAULT', number: Faker::PhoneNumber.phone_number)
+        contact.save
       end
 
-      def create
-        @client.authorize_from_request(
-            session[:request_token],
-            session[:request_secret],
-            :oauth_verifier => params[:oauth_verifier] )
-
-        session[:xero_auth] = {
-            :access_token => @client.access_token.token,
-            :access_key => @client.access_token.secret }
-
-        session[:request_token] = nil
-        session[:request_secret] = nil
+      def invoices
+        render json: @client.Invoice.all(:where => {:type => 'ACCREC', :amount_due_is_not => 0})
       end
 
-      def destroy
-        session.data.delete(:xero_auth)
-      end
 
       private
 
@@ -66,7 +60,7 @@ end
 #
 # contacts = xero.Contact.all(:order => 'Name')
 #
-# contact = xero.Contact.build(:name => 'Contact Name')
+contact = xero.Contact.build(:name => 'Contact Name')
 # contact.first_name = 'Joe'
 # contact.last_name = 'Bloggs'
 # # To add to a has_many association use the +add_{association}+ method

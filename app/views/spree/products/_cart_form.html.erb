@@ -1,5 +1,6 @@
 <%= form_for :order, :url => populate_orders_path do |f| %>
   <div class="row" id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+    <!-- TODO since we don't have variants yet, we're disabling this condition so as we can get to the checkout -->
     <% if @product.variants_and_option_values(current_currency).any? %>
       <div id="product-variants" class="col-md-6">
         <h3 class="product-section-title"><%= Spree.t(:variants) %></h3>

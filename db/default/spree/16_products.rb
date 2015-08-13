@@ -68,7 +68,7 @@ price_books_csv.each do |item|
     price_adjustment_factor: item[:price_adjustment_factor] || nil, # item[:price_adjustment_factor] || 1,
     priority:     item[:priority] || 0,
     discount:     item[:discount] == 1 ? true : false, # item[:discount] == 1 ? true : false,
-    role:         nil, # Spree::Role.find_by!(name: item[:role]) && Spree::Role.find_by!(name: 'admin'),
+    role:         Spree::Role.find_by!(name: item[:role]), # Spree::Role.find_by!(name: item[:role]) && Spree::Role.find_by!(name: 'admin'),
     parent:
       if item[:parent]
         Spree::PriceBook.find_or_create_by!(
@@ -82,7 +82,7 @@ price_books_csv.each do |item|
           discount:     false, # item[:discount] == 1 ? true : false, # item[:discount] == 1 ? true : false,
           # Price Books mightn't require role scope since they are scoped to a store. However, if it is required
           # how can we permit multiple roles?
-          role:         nil # Spree::Role.find_by!(name: item[:role]) && Spree::Role.find_by!(name: 'admin'),
+          role:         Spree::Role.find_by!(name: item[:role]) # Spree::Role.find_by!(name: item[:role]) && Spree::Role.find_by!(name: 'admin'),
         )
       end
   )
@@ -117,33 +117,35 @@ products_csv = SmarterCSV.process(
     File.join(Rails.root, 'db', 'default', 'data', '_Products.csv')
 )
 
-products_option_values_csv = SmarterCSV.process(
-    File.join(Rails.root, 'db', 'default', 'data', '_ProductsOptionValues.csv')
-)
-
-products_property_values_csv = SmarterCSV.process(
-    File.join(Rails.root, 'db', 'default', 'data', '_ProductsPropertyValues.csv')
-)
-
-# http://stackoverflow.com/questions/17409744/how-do-i-merge-two-arrays-of-hashes-based-on-same-hash-key-value
-products_csv.zip(products_option_values_csv).map! do |product_data, option_values|
-  if product_data[:sku] == option_values[:sku]
-    product_data.merge(option_values: option_values)
-  end
-end
-
-products_csv.zip(products_property_values_csv).map! do |product_data, properties|
-  if product_data[:sku] == properties[:sku]
-    product_data.merge(property_values: properties)
-  end
-end
+# products_option_values_csv = SmarterCSV.process(
+#     File.join(Rails.root, 'db', 'default', 'data', '_ProductsOptionValues.csv')
+# )
+#
+# products_property_values_csv = SmarterCSV.process(
+#     File.join(Rails.root, 'db', 'default', 'data', '_ProductsPropertyValues.csv')
+# )
+#
+# # http://stackoverflow.com/questions/17409744/how-do-i-merge-two-arrays-of-hashes-based-on-same-hash-key-value
+# products_csv.zip(products_option_values_csv).map! do |product_data, option_values|
+#   if product_data[:sku] == option_values[:sku]
+#     product_data.merge(option_values: option_values)
+#   end
+# end
+#
+# products_csv.zip(products_property_values_csv).map! do |product_data, properties|
+#   if product_data[:sku] == properties[:sku]
+#     product_data.merge(property_values: properties)
+#   end
+# end
 
 products = []
 
-products_csv.take(50).each do |item|
+products_csv.take(300).each do |item|
   product = Spree::Product.create!(
     {
-      name:         [item[:name], rand(10 ** 10)].join,
+      # Name must be unique
+      # [item[:accounting_name].titleize, rand(10 ** 10)].join,
+      name:         item[:accounting_name].titleize,
       tax_category: Spree::TaxCategory.find_by!(name: 'Taxable Goods & Services'),
       shipping_category: Spree::ShippingCategory.find_by!(
       name: item[:shipping_category] || 'default'),
@@ -159,7 +161,7 @@ products_csv.take(50).each do |item|
       promotionable: true, # item[:promotionable]
       # TODO properly align Taxons with and products, for now, just test a random selection
       taxons:        Spree::Taxon.all[1..2],
-      prototype_id:  Spree::Prototype.find_by(name: item[:prototype]) || nil
+      prototype_id:  nil # Spree::Prototype.find_by(name: item[:prototype]) || nil
     }
   )
 
@@ -185,38 +187,38 @@ products_csv.take(50).each do |item|
     }
   )
 
-  if product[:prototype_id]
-    # If prototype defined build the options and properties associations
-    product.add_associations_from_prototype
-
-    # Populate option values
-    if item[:option_values]
-      item[:option_values].each do |option_type, option_value|
-        product.option_values << Spree::OptionValue.find_or_create_by!(
-          name: option_value,
-          presentation: option_value
-        )
-      end
-    end
-
-    populate_properties(product, item[:property_values])
-
-  # Otherwise build associations according to available data
-  else
-    # Populate option values
-    if item[:option_values]
-      item[:option_values].each do |option_type, option_value|
-        product.option_types << Spree::OptionType.find_by!(name: option_type)
-
-        product.option_values << Spree::OptionValue.find_or_create_by!(
-            name: option_value,
-            presentation: option_value
-        )
-      end
-    end
-
-    populate_properties(product, item[:property_values])
-  end
+  # if product[:prototype_id]
+  #   # If prototype defined build the options and properties associations
+  #   product.add_associations_from_prototype
+  #
+  #   # Populate option values
+  #   if item[:option_values]
+  #     item[:option_values].each do |option_type, option_value|
+  #       product.option_values << Spree::OptionValue.find_or_create_by!(
+  #         name: option_value,
+  #         presentation: option_value
+  #       )
+  #     end
+  #   end
+  #
+  #   populate_properties(product, item[:property_values])
+  #
+  # # Otherwise build associations according to available data
+  # else
+  #   # Populate option values
+  #   if item[:option_values]
+  #     item[:option_values].each do |option_type, option_value|
+  #       product.option_types << Spree::OptionType.find_by!(name: option_type)
+  #
+  #       product.option_values << Spree::OptionValue.find_or_create_by!(
+  #           name: option_value,
+  #           presentation: option_value
+  #       )
+  #     end
+  #   end
+  #
+  #   populate_properties(product, item[:property_values])
+  # end
 
 # ===========================================================================
 # == Create Variants
@@ -284,10 +286,10 @@ products_csv.take(50).each do |item|
 
   # Pair StorePriceBooks and relevant Price
   explicit_price_per_store = {
-    as_retail:      item[:as_price],
-    ab_wholesale:   item[:ab_price],
-    aas_retail:     item[:aas_price],
-    abs_wholesale:  item[:abs_price]
+    as_retail:      item[:as_price] || 10,
+    ab_wholesale:   item[:ab_price] || 10,
+    aas_retail:     item[:aas_price] || 10,
+    abs_wholesale:  item[:abs_price] || 10
   }
 
   # Then create the Price and append it to the appropriate PriceBook
@@ -310,6 +312,23 @@ products_csv.take(50).each do |item|
   end
 end
 
+# ===========================================================================
+# == Set 'explicit' Store Price for Existing Products
+# For Spree demo data only
+# price_book = Spree::PriceBook.find_by!(default: true)
+#
+# Spree::Product.all.each do |product|
+#   price_book.prices << Spree::Price.find_or_create_by!(
+#       variant_id: product.master.id,
+#       price_book_id: price_book,
+#       amount: product.master.price,
+#       currency: product.cost_currency
+#   )
+#   price_book.save!
+#
+#   product.stores << Spree::Store.find_by!(default: true)
+#   # product.save!
+# end
 
 # ===========================================================================
 # == define Default Attributes

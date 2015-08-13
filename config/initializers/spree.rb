@@ -27,6 +27,8 @@
   # core/app/models/spree/app_configuration.rb
   # @docs https://guides.spreecommerce.com/developer/preferences.html
 # ===========================================================================
+require 'spree/core/search/searchkick'
+
 Spree.config do |config|
   config.address_requires_state       = true
   config.admin_interface_logo         = 'spree/logo/logo_lo.svg'
@@ -71,6 +73,7 @@ Spree.config do |config|
   # Giving it precedence of over configuration specified here. Will define
   # searcher_class in application.rb instead
   # config.searcher_class               = Spree::Search::Elasticsearch
+  # config.searcher_class               = Spree::Search::Searchkick
   config.shipping_instructions        = true
   config.show_only_complete_orders_by_default = false
   config.show_variant_full_price      = false

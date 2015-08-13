@@ -55,555 +55,165 @@
 # To return ActiveRecord objects
 # > search.records
 
-# require 'elasticsearch/model'
+# ===========================================================================
+
+# Within attributes
+# fields: [:field, :field]
+# where: {
+#   field:
+#     # Comparison lt, gte, lte or range
+#     {gt: int, lt: int}
+#     int..int # equivalent to {gte: 1, lte: 10}
+#     [id, id] # Find(id)
+#     {not: int}
+#     {not: [25, 30]}
+#     {all: [1, 3]}
+#     # regexp
+#     /frozen .+/,
+#     or: [
+#       [{field: bool}]
+#     ]
+# order: {_score: :desc}
+# limit: 20,
+# offset: 40
+
+# Spree::Product.search '',
 
 module Spree
-  Product.class_eval do
-    include Elasticsearch::Model
-    # include Elasticsearch::Model::Callbacks
+  Spree::Product.class_eval do
+    # has_many :conversions, class: 'Spree::Search::Conversion'
 
-    index_name Spree::ElasticsearchSettings.index
-    document_type 'spree_product'
+    searchkick text_middle: [:description],
+               word_start: [:name, :sku, :meta_keywords, :product_properties],
+               facets: [:price, :taxons, :product_properties],
+               autocomplete: [:name, :sku],
+               highlight: [:name, :sku],
+               wordnet: true,
+               suggest: [:name, :sku]
 
-    # If mappings dynamic: true, then all Spree::Product attributes will be used
-    # to build the index.
-    # Othewise, for full control on the index composition define the mappings in the model
-    # class and pass the option dynamic set to false:
+               # Tolerate synonyms as defined by Wordnet
+               # text_start: [:name]
+               # Synch reindex, ActiveJob to run task in background
+               # callbacks: :async,
+               # TODO write controller to create conversions on purchase
+               # conversions: 'conversions'
 
-    # Source https://github.com/noname00000123/elasticsearch-rails/blob/master/elasticsearch-rails/lib/rails/templates/searchable.rb
-    settings index: { number_of_shards: 1, number_of_replicas: 0 } do
-      mapping do
-        indexes :name, type: 'multi_field' do
-          indexes :name,     analyzer: 'snowball'
-          indexes :tokenized, analyzer: 'simple'
-        end
+    # == Source Override [1]
+    # spree-multi-domain-3734b6b678ba/app/models/spree/product_decorator.rb
+    scope :by_store, -> (store) { joins(:stores).where("spree_products_stores.store_id = ?", store) }
+    # End Source Override [1]
 
-        indexes :description, type: 'multi_field' do
-          indexes :description,   analyzer: 'snowball'
-          indexes :tokenized, analyzer: 'simple'
-        end
+    # Taxons
+    # Product Properties
+    # Option Types
+    scope :search_import, -> { includes(:variants_including_master, :taxons, :option_types, :product_properties) }
 
-        # indexes :content, type: 'multi_field' do
-        #   indexes :content,   analyzer: 'snowball'
-        #   indexes :tokenized, analyzer: 'simple'
-        # end
-        #
-        # indexes :published_on, type: 'date'
-        #
-        # indexes :authors do
-        #   indexes :full_name, type: 'multi_field' do
-        #     indexes :full_name
-        #     indexes :raw, analyzer: 'keyword'
-        #   end
-        # end
-        #
-        # indexes :categories, analyzer: 'keyword'
-        #
-        # indexes :comments, type: 'nested' do
-        #   indexes :body, analyzer: 'snowball'
-        #   indexes :stars
-        #   indexes :pick
-        #   indexes :user, analyzer: 'keyword'
-        #   indexes :user_location, type: 'multi_field' do
-        #     indexes :user_location
-        #     indexes :raw, analyzer: 'keyword'
-        #   end
-        # end
-      end
-    end
-    # mappings dynamic: 'false' do
-    # or
+    def search_data
+      data = {
+        sku: self.sku,
+        price: self.price,
+        # product_properties: includes(:property).try(:value), # product_properties.map(&:value)
+        meta_keywords: self.meta_keywords.split(',')
 
-    # Source spree_elasticsearch-53a70187871b/app/models/spree/product_decorator.rb
-    # mapping _all: {
-    #   'index_analyzer' => 'nGram_analyzer',
-    #   'search_analyzer' => 'whitespace_analyzer'} do
-    #
-    #   indexes :name, type: 'multi_field' do
-    #     indexes :name, type: 'string', analyzer: 'nGram_analyzer', boost: 100
-    #     indexes :untouched, type: 'string', include_in_all: false, index: 'not_analyzed'
-    #   end
-    #
-    #   indexes :description, analyzer: 'snowball'
-    #   indexes :available_on, type: 'date', format: 'dateOptionalTime', include_in_all: false
-    #   indexes :price, type: 'double'
-    #   indexes :sku, type: 'string', index: 'not_analyzed'
-    #   indexes :taxon_ids, type: 'string', index: 'not_analyzed'
-    #   indexes :properties, type: 'string', index: 'not_analyzed'
-    # end
-
-    # Set up callbacks for updating the index on model changes
-    # after_commit lambda {
-    #   Indexer.perform_async(:index,  self.class.to_s, self.id)
-    # }, on: :create
-    #
-    # after_commit lambda {
-    #   Indexer.perform_async(:update, self.class.to_s, self.id)
-    # }, on: :update
-    #
-    # after_commit lambda {
-    #   Indexer.perform_async(:delete, self.class.to_s, self.id)
-    # }, on: :destroy
-    #
-    # after_touch  lambda {
-    #   Indexer.perform_async(:update, self.class.to_s, self.id)
-    # }
-
-    def as_indexed_json(options={})
-      # hash = self.as_json(
-      #     include: { authors:    { methods: [:full_name], only: [:full_name] },
-      #                comments:   { only: [:body, :stars, :pick, :user, :user_location] }
-      #     })
-      # hash['categories'] = self.categories.map(&:title)
-      # hash
-      # result =
-      #   as_json({
-      #     methods: [:price, :sku],
-      #     only: [:available_on, :description, :name],
-      #     include: {
-      #       variants: {
-      #         only: [:sku],
-      #         include: {
-      #           option_values: {
-      #             only: [:name, :presentation]
-      #           }
-      #         }
-      #       }
-      #     }
-      #   })
-      # result[:properties] = property_list unless property_list.empty?
-      # result[:taxon_ids] =
-      #   taxons.map(&:self_and_ancestors).flatten.uniq.map(&:id) unless taxons.empty?
-      #
-      # result
-    end
-
-    # Search in title and content fields for `query`, include highlights in response
-    #
-    # @param query [String] The user query
-    # @return [Elasticsearch::Model::Response::Response]
-    # Source https://github.com/elastic/elasticsearch-rails/blob/738c63efacc167b6e8faae3b01a1a0135cfc8bbb/elasticsearch-rails/lib/rails/templates/searchable.rb
-    def self.search(query, options={})
-      # Prefill and set the filters (top-level `filter` and `facet_filter` elements)
-      __set_filters = lambda do |key, f|
-
-        @search_definition[:filter][:and] ||= []
-        @search_definition[:filter][:and]  |= [f]
-
-        @search_definition[:facets][key.to_sym][:facet_filter][:and] ||= []
-        @search_definition[:facets][key.to_sym][:facet_filter][:and]  |= [f]
-      end
-
-      @search_definition = {
-          query: {},
-
-          highlight: {
-              pre_tags: ['<em class="label label-highlight">'],
-              post_tags: ['</em>'],
-              fields: {
-                  name:    { number_of_fragments: 0 },
-                  # abstract: { number_of_fragments: 0 },
-                  description:  { fragment_size: 50 }
-              }
-          },
-
-          filter: {},
-
-          # facets: {
-          #     categories: {
-          #         terms: {
-          #             field: 'categories'
-          #         },
-          #         facet_filter: {}
-          #     },
-          #     authors: {
-          #         terms: {
-          #             field: 'authors.full_name.raw'
-          #         },
-          #         facet_filter: {}
-          #     },
-          #     published: {
-          #         date_histogram: {
-          #             field: 'published_on',
-          #             interval: 'week'
-          #         },
-          #         facet_filter: {}
-          #     }
-          # }
+      # :currency, :display_amount, :display_price, :weight, :height, :width, :depth, :is_master, :has_default_price?, :cost_currency, :price_in, :amount_in
       }
 
-      unless query.blank?
-        @search_definition[:query] = {
-            bool: {
-                should: [
-                    { multi_match: {
-                        query: query,
-                        fields: %w(name^10 description), # ['name^10', 'abstract^2', 'content'],
-                        operator: 'and'
-                    }
-                    }
-                ]
-            }
-        }
-      else
-        @search_definition[:query] = { match_all: {} }
-        # @search_definition[:sort]  = { published_on: 'desc' }
-      end
-
-      # if options[:category]
-      #   f = { term: { categories: options[:category] } }
-      #
-      #   __set_filters.(:authors, f)
-      #   __set_filters.(:published, f)
-      # end
-      #
-      # if options[:author]
-      #   f = { term: { 'authors.full_name.raw' => options[:author] } }
-      #
-      #   __set_filters.(:categories, f)
-      #   __set_filters.(:published, f)
-      # end
-      #
-      # if options[:published_week]
-      #   f = {
-      #       range: {
-      #           published_on: {
-      #               gte: options[:published_week],
-      #               lte: "#{options[:published_week]}||+1w"
-      #           }
-      #       }
-      #   }
-      #
-      #   __set_filters.(:categories, f)
-      #   __set_filters.(:authors, f)
-      # end
-
-      # if query.present? && options[:comments]
-      #   @search_definition[:query][:bool][:should] ||= []
-      #   @search_definition[:query][:bool][:should] << {
-      #       nested: {
-      #           path: 'comments',
-      #           query: {
-      #               multi_match: {
-      #                   query: query,
-      #                   fields: ['body'],
-      #                   operator: 'and'
-      #               }
-      #           }
-      #       }
-      #   }
-      #   @search_definition[:highlight][:fields].update 'comments.body' => { fragment_size: 50 }
-      # end
-
-      # if options[:sort]
-      #   @search_definition[:sort]  = { options[:sort] => 'desc' }
-      #   @search_definition[:track_scores] = true
-      # end
-
-      unless query.blank?
-        @search_definition[:suggest] = {
-            text: query,
-            suggest_title: {
-                term: {
-                    field: 'name.tokenized',
-                    suggest_mode: 'always'
-                }
-            },
-            suggest_body: {
-                term: {
-                    field: 'description.tokenized',
-                    suggest_mode: 'always'
-                }
-            }
-        }
-      end
-
-      __elasticsearch__.search(@search_definition)
-    end
-
-    # def self.search(query)
-    #   # TODO congigure advanced or combination queries later. For now happy with simple search
-    #   __elasticsearch__.search(
-    #     {
-    #       query: {
-    #         filtered: {
-    #           query: {
-    #             query_string: {
-    #               query: query,
-    #               fields: []
-    #             }
-    #           },
-    #
-    #           filter: {
-    #             and: [
-    #               {
-    #                 terms: {
-    #                   taxons: []
-    #                 }
-    #               },
-    #
-    #               {
-    #                 terms: {
-    #                   properties: []
-    #                 }
-    #               }
-    #             ]
-    #           }
-    #         }
-    #       },
-    #
-    #       filter: {
-    #         range: {
-    #           price: {
-    #             lte: ,
-    #             gte:
-    #           }
-    #         }
-    #       },
-    #
-    #       sort: [],
-    #
-    #       from: ,
-    #
-    #       facets:
-    #     },
-    #
-    #
-    #     {
-    #       query: {
-    #         multi_match: {
-    #           query: query,
-    #           #Boost likely search term candidates
-    #           fields: %w(
-    #             name^10
-    #             sku^10
-    #             description
-    #           ),
-    #           fuzziness: 'AUTO',
-    #           slop: 2
-    #         },
-    #
-    #         # bool: {
-    #         #   should: {
-    #         #     # fuzziness represents the maximum allowed Levenshtein distance, it
-    #         #     # accepts an integer between 0 and 2 (where 2 means the fuzziest search
-    #         #     # possible) or the string “AUTO” which will generate an edit distance
-    #         #     # based on the charachers length of the terms in the query.
-    #         #     # TODO test effectiveness of maximum fuzziness '2' or 'AUTO'
-    #         #     fuzzy: {
-    #         #       name: {
-    #         #         value: 'winsor',
-    #         #         boost: 1.0,
-    #         #         fuzziness: 'AUTO',
-    #         #         prefix_length: 0,
-    #         #         max_expansions: 100
-    #         #       },
-    #         #
-    #         #       price: {
-    #         #         value: 12,
-    #         #         fuzziness: 2
-    #         #       }
-    #         #     }
-    #         #   }
-    #         # }
-    #       },
-    #
-    #       # fuzzy_like_this_field: {
-    #       #   name: {
-    #       #     like_text: 'winston',
-    #       #     max_query_terms: 12
-    #       #   }
-    #       # }
-    #
-    #       # Highlight search phrase occurrences within results
-    #       highlight: {
-    #         fields: {
-    #           name: {},
-    #           description: {}
-    #         },
-    #         pre_tags: ['<strong>'],
-    #         post_tags: ['</strong>']
-    #       }
-    #     }
-    #   )
-    # end
-
-    # Inner class used to query elasticsearch. The idea is that the query is
-    # dynamically built based on the parameters.
-    class Product::ElasticsearchQuery
-      include ::Virtus.model
-
-      attribute :from, Integer, default: 0
-      attribute :price_min, Float
-      attribute :price_max, Float
-      attribute :properties, Hash
-      attribute :query, String
-      attribute :taxons, Array
-      attribute :browse_mode, Boolean
-      attribute :sorting, String
-
-      # When browse_mode is enabled, the taxon filter is placed at top level.
-      # This causes the results to be limited, but facetting is done on the
-      # complete dataset.
-      # When browse_mode is disabled, the taxon filter is placed inside the
-      # filtered query. This causes the facets to be limited to the resulting set.
-
-      # Method that creates the actual query based on the current attributes.
-      # The idea is to always to use the following schema and fill in the blanks.
       # {
-      #   query: {
-      #     filtered: {
-      #       query: {
-      #         query_string: { query: , fields: [] }
-      #       }
-      #       filter: {
-      #         and: [
-      #           { terms: { taxons: [] } },
-      #           { terms: { properties: [] } }
-      #         ]
-      #       }
-      #     }
-      #   }
-      #   filter: { range: { price: { lte: , gte: } } },
-      #   sort: [],
-      #   from: ,
-      #   facets:
+      #   name: self.name,
+      #   available_on: :available_on,
+      #   #updated_at: updated_at,
+      #
+
+      #   description: self.try(:description),
+      #   price: :price,
+      #   #Spree::Product.first.product_properties.includes(:property).map(&:value)
+      #   product_properties: self.includes(:property).try(:value)
+      #   #option_types: [options.try(:value)],
+      #   #taxons.map(&:name).uniq!,
+      #   #taxons: [taxons.name]
       # }
 
-      def to_hash
-        q = { match_all: {} }
-
-        unless query.blank? # nil or empty
-          q = {
-            query_string: {
-              query: query,
-              fields: %w(
-                name^5
-                description
-              ),
-              # sku
-              default_operator: 'AND',
-              use_dis_max: true
-            }
-          }
-        end
-
-        query = q
-
-        and_filter = []
-
-        unless @properties.nil? || @properties.empty?
-          # transform properties from [{"key1" => ["value_a","value_b"]},{"key2" => ["value_a"]}
-          # to { terms: { properties: ["key1||value_a","key1||value_b"] }
-          #    { terms: { properties: ["key2||value_a"] }
-          # This enforces "and" relation between different property values and "or" relation between same property values
-          properties = @properties.map {|k,v| [k].product(v)}
-          properties.map do |pair|
-            and_filter << {
-              terms: {
-                properties: pair.map {|prop| prop.join('||')}
-              }
-            }
-          end
-        end
-
-        sorting =
-          case @sorting
-            when 'name_asc'
-              [ 
-                {'name.untouched' => { order: 'asc' }}, 
-                {'price' => { order: 'asc' }}, 
-                '_score' 
-              ]
-              
-            when 'name_desc'
-              [ 
-                {'name.untouched' => { order: 'desc' }}, 
-                {'price' => { order: 'asc' }}, 
-                '_score'
-              ]
-              
-            when 'price_asc'
-              [ 
-                {'price' => { order: 'asc' }}, 
-                {'name.untouched' => { order: 'asc' }}, 
-                '_score' 
-              ]
-              
-            when 'price_desc'
-              [ 
-                {'price' => { order: 'desc' }}, 
-                {'name.untouched' => { order: 'asc' }}, 
-                '_score' 
-              ]
-            when 'score'
-              [ 
-                '_score', 
-                {'name.untouched' => { order: 'asc' }}, 
-                {'price' => { order: 'asc' }} 
-              ]
-            else
-              [ 
-                {'name.untouched' => { order: 'asc' }}, 
-                {'price' => { order: 'asc' }}, 
-                '_score' 
-              ]
-          end
-
-        # facets
-        facets = {
-          price: { 
-            statistical: {field: 'price'} 
-          },
-          properties: { 
-            terms: {field: 'properties', order: 'count', size: 1000000 }
-          },
-          taxon_ids: { 
-            terms: {field: 'taxon_ids', size: 1000000} 
-          }
-        }
-
-        # basic skeleton
-        result = {
-          min_score: 0.1,
-          query: { filtered: {} },
-          sort: sorting,
-          from: from,
-          facets: facets
-        }
-
-        # add query and filters to filtered
-        result[:query][:filtered][:query] = query
-        # taxon and property filters have an effect on the facets
-        and_filter << { terms: { taxon_ids: taxons } } unless taxons.empty?
-        # only return products that are available
-        and_filter << { range: { available_on: { lte: "now" } } }
-        result[:query][:filtered][:filter] =
-          { 'and' => and_filter } unless and_filter.empty?
-
-        # add price filter outside the query because it should have no effect on facets
-        if price_min && price_max && (price_min < price_max)
-          result[:filter] = {
-            range: {
-              price: {
-                gte: price_min,
-                lte: price_max
-              }
-            }
-          }
-        end
-
-        result
-      end
+      #     keywords: meta_keywords,
+      #     # TODO Increase weight for queries with higher conversion rate
+      #     # conversions: conversions.group(:query).count,
+      #     # Personalised results: boost products ordered previously
+      #     # orders: orders.pluck(:user_id)
+      #   # END
+      # }
     end
+
+    # define filters here rather than in the controller
+    # https://github.com/18F/answers/commit/1236048f43f7c1c487dad82a135b66ecd99de056
+    def self.filter_by_price
+      # ranges = [1..10, 11...20, 21..50, 51..100, {gt: 100}]
+
+      # Spree::Product.search '*', where: {price: range},
+      #                       facets: {price: {ranges: ranges}},
+      #                       smart_facets: true,
+      #                       page: @properties[:page],
+      #                       per_page: @properties[:per_page]
+      # Spree::Product.search '*', where: {price: {lt: 100}}, facets: {price: {to: 20, from: 21}}, smart_facets: true
+      # return Spree::Product.all if query.blank?
+      self.search '*', facets: {price: {to: 20, from: 21}}
+
+      # Spree::Product.search '*', where: {price: 1..10},
+      #                       facets: [:price],
+      #                       smart_facets: true,
+      #                       page: 1,
+      #                       per_page: 10
+    end
+
+    def self.filter_by_colour
+      # Example
+      # Spree::Product.search '*', where: {price: range},
+      #                       facets: [:price],
+      #                       smart_facets: true,
+      #                       page: @properties[:page],
+      #                       per_page: @properties[:per_page]
+    end
+
+
+    # TODO scope selection to only active products
+    # We'll want to limit index size to active per store
+    # But in doing so we'd have to maintain an index per store.
+    # Fore now we'll just rely upon the scoping setup in Spree::Search::Searchkick
+    # def should_index?
+    #   Spree::Product.active.by_store(current_store.id)
+    # end
 
     private
 
-    def property_list
-      product_properties.map{|pp| "#{pp.property.name}||#{pp.value}"}
-    end
+    # def property_list
+    #   product_properties.map{|pp| "#{pp.property.name}||#{pp.value}"}
+    # end
   end
 end
 
+# TODO first create association User has many searches, has many orders,
+# The create record on search, store params[:query] and Time searched
+# https://github.com/ankane/searchkick/issues/12
+# @search = current_user.searches.create!(query: params[:query], searched_at: Time.now)
+
+# Render @search in view
+#     <script>
+#       var searchId = <%= @search.try(:id) %>;
+#     </script>
+
+# // example uses jQuery you must set productId on your own
+# $.post("/searches/" + searchId + "/conversion", {product_id: productId});
+
+# In Spree::Search::Conversion Model
+# def conversion
+#   search = current_user.searches.find(params[:id)
+#   if !search.converted_at
+#     search.converted_at = Time.now
+#     search.product_id = params[:product_id]
+#     search.save!
+#   end
+#   render nothing: true
+# end
+
 # Synchronise spree_products table and Elasticsearch indexing
-Spree::Product.import
+# Spree::Product.reindex
+# Spree::Product.import
+

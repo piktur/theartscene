@@ -6,13 +6,6 @@ html.no-js lang="#{I18n.locale}"
 
   head data-hook='inside_head'
     == render partial: 'spree/shared/head'
-    / TODO properly configure search typehead
-    /script
-    /  |
-    /    $("#search").typeahead({
-    /      name: "products",
-    /      remote: "/products/autocomplete?query=%QUERY"
-    /    });
 
   body.body_class [
     id="#{@body_id || 'default'}"
@@ -20,9 +13,12 @@ html.no-js lang="#{I18n.locale}"
 
     == render partial: 'spree/shared/google_analytics.js'
 
-    == render partial: 'spree/shared/header'
+    = render partial: 'spree/shared/main_nav_bar' if store_menu?
 
-    .container-fluid
+    - if current_page?(controller: 'home')
+      == render partial: 'spree/shared/header'
+
+    .container-fluid#main style="margin-top: 100px;"
       .row data-hook=''
 
         == breadcrumbs(@taxon)
@@ -43,5 +39,5 @@ html.no-js lang="#{I18n.locale}"
 
 / Initialise interactive ruby console within view context for development mode
   only
-- if Rails.env.development?
+/- if Rails.env.development?
   - console

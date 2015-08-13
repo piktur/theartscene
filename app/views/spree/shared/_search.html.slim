@@ -1,92 +1,223 @@
 - @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots
 - @taxonomies = @taxononomies.present? ? @taxononomies : Spree::Taxonomy.all
+/css:
+/  .dropdown.dropdown-lg .dropdown-menu {
+/    margin-top: -1px;
+/    padding: 6px 20px;
+/  }
+/
+/  .input-group-btn-lg .btn-group {
+/    display: flex !important;
+/  }
+/
+/  .btn-group-lg .btn {
+/    border-radius: 0;
+/    margin-left: -1px;
+/  }
+/
+/  .btn-group-lg .btn:last-child {
+/    border-top-right-radius: 30px;
+/    border-bottom-right-radius: 30px;
+/  }
+/
+/  .btn-group-lg .form-horizontal .btn[type="submit"] {
+/    /*border-top-left-radius: 4px;*/
+/    /*border-bottom-left-radius: 4px;*/
+/  }
+/
+/  .form-horizontal .form-group {
+/    margin-left: 0;
+/    margin-right: 0;
+/  }
+/
+/  .form-group .form-control:last-child {
+/    border-top-left-radius: 4px;
+/    border-bottom-left-radius: 4px;
+/  }
+/
+/  @media screen and (min-width: 768px) {
+/    #search {
+/      width: 40vw;
+/      margin: 0 auto;
+/    }
+/
+/    .dropdown.dropdown-lg {
+/      position: static !important;
+/    }
+/
+/    .dropdown.dropdown-lg .dropdown-menu {
+/      min-width: 400px;
+/    }
+/  }
+
 
 = form_tag spree.products_path,
            method: :get,
            role: 'search',
-           id: 'search',
-           class: 'navbar-form' do
+           id: 'search' do
+  .input-group
+    input.form-control.input-lg.typeahead name='query' placeholder="Search" type="search"
 
-  .form-group#bloodhound
-    .input-group
-      span.input-group-addon.dropdown
-        - cache(cache_key_for_taxons) do
-          /= select_tag :taxononmy,
-            options_for_select(),
-            'aria-label' => 'Taxon',
-            class: 'form-control'
+  button.btn.btn-lg.btn-success type="submit"
+    |Search
+  /span.icon.inline.i-search aria-hidden="true"
+  /- cache(cache_key_for_taxons) do
+    .input-group-btn.input-group-btn-lg.col-md-
+      button.btn.btn.btn-default.dropdown-toggle [
+        data-toggle='dropdown'
+        role='button']
+        |by deptartment&#32;
+        span.icon.i-chevron-down.inline
 
-          a.dropdown-toggle data-toggle='dropdown' role='button'
-            |Dept.&#32;
-            span.icon.i-chevron-down.inline
+      / TODO selected should be something like this ,
+      /@taxon ? @taxon.id : params[:taxon]), 'aria-label' => 'Taxon', class: "dropdown-menu"
+                for now, at this hour, quick and dirty prevails
+      /ul.dropdown-menu
+        li
+          a [
+            aria-expanded="false"
+            data-toggle="dropdown"
+            href="#{spree.root_path}"]
+            == Spree.t(:all_departments)
 
-          ul.dropdown-menu
-            /== [[Spree.t(:all_departments), '']] + @taxonomies.map {|t| [t.name, t.id]}, @taxonomy ? @taxonomy.id : params[:taxon]
+  /.dropdown.dropdown-lg
+    button.btn.btn-default.dropdown-toggle aria-expanded="false" data-toggle="dropdown" type="button"
+      span.caret
+    .dropdown-menu.dropdown-menu-right role="menu"
+      .form-group
+        label for="filter" Filter by
+        select.form-control
+          option selected="" value="0" Search
+          option value="1" Featured
+          option value="2" Popularity
+          option value="3" Most reviewed
+      .form-group
+        label for="contain" Author
+        input.form-control type="text"
+      .form-group
+        label for="contain" Contains the words
+        input.form-control type="text"
+      button.btn.btn-success type="submit"
+        span.icon.inline.i-search aria-hidden="true"
 
 
-      /= search_field_tag :keywords,
-                           params[:keywords],
-                           :placeholder => Spree.t(:search),
-                           class: "form-control",
-                           id: "search"
 
-      input#search.form-control.input-lg.typeahead [
-        name='q'
-        type='text'
-        placeholder="#{Spree.t(:search)}"]
+/= form_tag spree.products_path,
+/                 method: :get,
+/                 role: 'search',
+/                 id: 'search' do
 
-      /span.input-group-btn
-        input.btn.btn-success.btn-lg type="submit"
-          span.icon.inline.i-search
-          /== Spree.t(:search)
+  /.form-group
+  /  .input-group
+  /    span.input-group-addon.dropdown
+  /      - cache(cache_key_for_taxons) do
+  /        a.dropdown-toggle data-toggle='dropdown' role='button'
+  /          |Dept.&#32;
+  /          span.icon.i-chevron-down.inline
+  /
+  /        / TODO selected should be something like this ,
+  /        /@taxon ? @taxon.id : params[:taxon]), 'aria-label' => 'Taxon', class: "dropdown-menu"
+  /          for now, at this hour, quick and dirty prevails
+  /        ul.dropdown-menu
+  /          li.dropdown
+  /            a.dropdown-toggle [
+  /              aria-expanded="false"
+  /              data-toggle="dropdown"
+  /              href="#{spree.root_path}"]
+  /              == Spree.t(:all_departments)
+  /
+  /          / TODO don't perform this dumb lookup just hacking something together
+  /            permalink: Spree::Taxon.find_by!(name: t.name).permalink}
+  /          - @taxonomies.each do |t|
+  /            li.dropdown
+  /              a [
+  /                aria-expanded="false"
+  /                class="dropdown-toggle"
+  /                data-toggle="dropdown"
+  /                href="/"]
+  /                == t.name
+  /
+  /    input.form-control.input.typeahead [
+  /      name='query'
+  /      type='text'
+  /      autocomplete='false'
+  /      placeholder="#{Spree.t(:search)}"]
+  /
+  /    span.input-group-btn.col-lg-1
+  /      input.btn.btn-success.btn-lg type="submit" value="#{Spree.t(:search)}"
+  /        /span.icon.inline.i-search
 
-  javascript:
-    // ===== String matching
-    var substringMatcher = function(strs) {
-      return function findMatches(q, cb) {
-        var matches, substringRegex;
 
-        // an array that will be populated with substring matches
-        matches = [];
+/scss:
+/  .twitter-typeahead {
+/    .tt-hint {
+/
+/
+/    }
+/
+/    .tt-input {
+/
+/    }
+/  }
+/
+/  .tt-menu {
+/    width: 100%;
+/    min-width: 160px;
+/    margin-top: 2px;
+/    padding: 5px 0;
+/    background-color: #fff;
+/    border: 1px solid #ccc;
+/    border: 1px solid rgba(0, 0, 0, 0.2);
+/    *border-right-width: 2px;
+/    *border-bottom-width: 2px;
+/    -webkit-border-radius: 6px;
+/    -moz-border-radius: 6px;
+/    border-radius: 6px;
+/    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+/    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+/    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+/    -webkit-background-clip: padding-box;
+/    -moz-background-clip: padding;
+/    background-clip: padding-box;
+/
+/    .tt-dataset {
+/      .tt-suggestion {
+/        display: block;
+/        padding: 3px 20px;
+/      }
+/      .tt-selectable {
+/
+/      }
+/
+/      .tt-is-under-cursor {
+/        color: #fff;
+/        background-color: #0081c2;
+/        background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+/        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+/        background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+/        background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+/        background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+/        background-repeat: repeat-x;
+/        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+/
+/        a {
+/          color: #fff;
+/        }
+/      }
+/
+/      p {
+/        margin: 0;
+/      }
+/    }
+/  }
+/
+/  #search {
+/    .twitter-typeahead {
+/      width: 100%;
+/    }
+/    .btn {
+/      vertical-align: top;
+/    }
+/  }
 
-        // regex used to determine if a string contains the substring `q`
-        substrRegex = new RegExp(q, 'i');
 
-        // iterate through the pool of strings and for any string that
-        // contains the substring `q`, add it to the `matches` array
-        $.each(strs, function(i, str) {
-          if (substrRegex.test(str)) {
-            matches.push(str);
-          }
-        });
-
-        cb(matches);
-      };
-    };
-
-    var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-      'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-      'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-      'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-      'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-      'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-      'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-      'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-      'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-    ];
-
-    $('#search .typeahead .strings').typeahead({
-      hint: true,
-      highlight: true,
-      minLength: 1
-    },
-    {
-      name: 'states',
-      source: substringMatcher(states)
-    });
-
-    // ===== with bloodhound
-    $('#blou .typeahead .prefetch').typeahead(null, {
-      name: 'countries',
-      source: countries
-    });

@@ -1,11 +1,12 @@
 module Spree
   ProductsController.class_eval do
+    before_action :load_product, only: :show
+    before_action :load_taxon, only: :index
 
-    # TODO for Searchkick Autocomplete implementation
-    # Source https://github.com/ankane/searchkick/blob/72baec0e1fdf02559ce3e06fdccce2d6e5fb394d/README.md
-    # def autocomplete
-    #   render json: Spree::Product.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
-    # end
+    rescue_from ActiveRecord::RecordNotFound, :with => :render_404
+    helper 'spree/taxons'
+
+    respond_to :html, :xml, :json
 
     # == Source Override[1]
     # See spree-multi-domain-3734b6b678ba/app/controllers/spree/products_controller_decorator.rb
@@ -23,8 +24,16 @@ module Spree
 
     def index
       @searcher = build_searcher(params.merge(include_images: true))
-      @products = Spree::Product.search(params[:q]).records # @searcher.retrieve_products
+      @products = @searcher.retrieve_products
       @taxonomies = get_taxonomies
+    end
+
+    # TODO Searchkick Autocomplete implementation
+    # OR this via the Spree API
+    # Source https://github.com/ankane/searchkick/blob/72baec0e1fdf02559ce3e06fdccce2d6e5fb394d/README.md
+    def autocomplete
+      @searcher = build_searcher(params.merge(autocomplete: true))
+      render json: (@searcher.retrieve_products_autocomplete)
     end
 
     private
@@ -35,7 +44,7 @@ module Spree
         raise ActiveRecord::RecordNotFound
       end
     end
-    # Source Override[2]
+    # End Source Override[2]
   end
 end
 
